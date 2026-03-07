@@ -74,7 +74,7 @@ export default function Footer() {
 
             {/* Bottom Section - Copyright */}
             <div className="w-full text-center text-sm text-white">
-                © 2025 Zoya. All Rights Reserved.
+                © 2026 Zoya. All Rights Reserved.
             </div>
         </div>
     );
