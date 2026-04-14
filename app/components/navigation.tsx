@@ -14,6 +14,7 @@ const portfolioItems = [
   { name: "Shopify Case Studies", href: "/shopify-case-studies" },
   { name: "SEO Portfolio", href: "/seo-portfolio" },
   { name: "QA Portfolio", href: "/qa-portfolio" },
+  { name: "Blogs", href: "/blog" },
   // Add more portfolio categories here:
   // { name: "E-commerce", href: "/ecommerce" },
 ];
@@ -117,7 +118,7 @@ const Navigation = () => {
               />
             </motion.div>
           </Link>
-      
+
           {/* Portfolio Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
@@ -266,3 +267,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

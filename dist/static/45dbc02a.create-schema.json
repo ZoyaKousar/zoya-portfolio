@@ -1,0 +1,1152 @@
+[
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "fields": [
+          {
+            "name": "text",
+            "type": "string",
+            "title": "Button Text"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "link",
+            "type": "url",
+            "title": "Button Link"
+          }
+        ],
+        "name": "button1",
+        "type": "object",
+        "title": "Hire Button"
+      },
+      {
+        "fields": [
+          {
+            "name": "text",
+            "type": "string",
+            "title": "Button Text"
+          },
+          {
+            "name": "pdfFile",
+            "type": "file",
+            "title": "PDF File"
+          }
+        ],
+        "name": "button2",
+        "type": "object",
+        "title": "CV Button"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "profession",
+            "type": "string"
+          },
+          {
+            "name": "descriptionDsk",
+            "type": "text",
+            "title": "Desktop Description"
+          },
+          {
+            "name": "descriptionMob",
+            "type": "text",
+            "title": "Mobile Description"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              }
+            ],
+            "name": "image",
+            "type": "image"
+          }
+        ],
+        "name": "aboutMeSection",
+        "type": "document"
+      },
+      {
+        "fields": [
+          {
+            "name": "experience",
+            "type": "string",
+            "title": "Experience Year"
+          },
+          {
+            "name": "expDescription",
+            "type": "string",
+            "title": "Experience Description"
+          },
+          {
+            "name": "projectCmp",
+            "type": "string",
+            "title": "Project Completed"
+          },
+          {
+            "name": "proDescription",
+            "type": "string",
+            "title": "Project Description"
+          },
+          {
+            "name": "clients",
+            "type": "string"
+          },
+          {
+            "name": "clientsDesc",
+            "type": "string",
+            "title": "Clients Description"
+          }
+        ],
+        "name": "timelineSection",
+        "type": "document"
+      },
+      {
+        "fields": [
+          {
+            "name": "titlebfHighlight",
+            "type": "string",
+            "title": "title Before Highlight"
+          },
+          {
+            "name": "titleHigh",
+            "type": "string",
+            "title": "title Highlight"
+          },
+          {
+            "name": "titleAfHighlight",
+            "type": "string",
+            "title": "title After Highlight"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              }
+            ],
+            "name": "image",
+            "type": "image"
+          }
+        ],
+        "name": "recentSection",
+        "type": "document",
+        "title": "Recent Work Section"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              }
+            ],
+            "name": "imageDsk",
+            "type": "image",
+            "title": "Desktop Image"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              }
+            ],
+            "name": "imageMob",
+            "type": "image",
+            "title": "Mobile Image"
+          }
+        ],
+        "name": "toolsSection",
+        "type": "document"
+      },
+      {
+        "fields": [
+          {
+            "name": "titleHighlight",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "fields": [
+                      {
+                        "name": "alt",
+                        "type": "string",
+                        "title": "Alt Text"
+                      }
+                    ],
+                    "name": "image",
+                    "type": "image"
+                  },
+                  {
+                    "name": "title",
+                    "type": "string"
+                  },
+                  {
+                    "name": "line1",
+                    "type": "string"
+                  },
+                  {
+                    "name": "line2",
+                    "type": "string"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "items",
+            "type": "array"
+          }
+        ],
+        "name": "servicesSection",
+        "type": "document"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "descBfHighlight",
+            "type": "string",
+            "title": "Desc Before Highlight"
+          },
+          {
+            "name": "descHigh1",
+            "type": "string",
+            "title": "Desc Highlight 1"
+          },
+          {
+            "name": "descAfHighlight",
+            "type": "string",
+            "title": "Desc After Highlight"
+          },
+          {
+            "name": "descHigh2",
+            "type": "string",
+            "title": "Desc Highlight 2"
+          },
+          {
+            "name": "descAfHighlight2",
+            "type": "string",
+            "title": "Desc After Highlight 2"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "name": "profilePhoto",
+                    "type": "image"
+                  },
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "name": "starPhoto",
+                    "type": "image"
+                  },
+                  {
+                    "name": "clientName",
+                    "type": "string"
+                  },
+                  {
+                    "name": "date",
+                    "type": "date"
+                  },
+                  {
+                    "name": "description",
+                    "type": "text"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "testimonials",
+            "type": "array"
+          }
+        ],
+        "name": "testimonialSection",
+        "type": "document",
+        "title": "Testimonials Section"
+      }
+    ],
+    "name": "heroSection",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "mainTitle",
+        "type": "string"
+      },
+      {
+        "name": "mainDescription",
+        "type": "text"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": "title"
+          },
+          {
+            "name": "descriptionBeforeHighlight",
+            "type": "string"
+          },
+          {
+            "name": "descriptionHighlight",
+            "type": "string",
+            "title": "Description"
+          },
+          {
+            "name": "descriptionAfterHighlight",
+            "type": "string"
+          },
+          {
+            "name": "subDesciption",
+            "type": "string",
+            "title": "Sub Description"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "name": "title",
+                    "type": "string",
+                    "title": "Service Title"
+                  },
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "fields": [
+                      {
+                        "name": "alt",
+                        "type": "string",
+                        "title": "Alt Text"
+                      }
+                    ],
+                    "name": "image",
+                    "type": "image",
+                    "title": "Service Image"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "services",
+            "type": "array"
+          }
+        ],
+        "name": "headSectiom",
+        "type": "object",
+        "title": "Head Section"
+      },
+      {
+        "description": "Manage accordion items that expand to show detailed content",
+        "fields": [
+          {
+            "description": "Add multiple accordion items. Each item will be expandable on the frontend.",
+            "of": [
+              {
+                "fields": [
+                  {
+                    "validation": [
+                      {
+                        "rules": [
+                          {
+                            "flag": "presence",
+                            "constraint": "required"
+                          },
+                          {
+                            "flag": "max",
+                            "constraint": 100
+                          }
+                        ],
+                        "level": "warning",
+                        "message": "Title should be concise"
+                      }
+                    ],
+                    "description": "The title that appears in the accordion header",
+                    "name": "title",
+                    "type": "string",
+                    "title": "Accordion Title"
+                  },
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "description": "Icon displayed next to the title in the accordion header",
+                    "fields": [
+                      {
+                        "description": "Alternative text for the icon (for accessibility)",
+                        "name": "alt",
+                        "type": "string",
+                        "title": "Alt Text"
+                      }
+                    ],
+                    "name": "headerIcon",
+                    "type": "image"
+                  },
+                  {
+                    "description": "Content that appears when the accordion is expanded",
+                    "fields": [
+                      {
+                        "options": {
+                          "hotspot": true
+                        },
+                        "description": "Main image displayed in the accordion content",
+                        "fields": [
+                          {
+                            "name": "alt",
+                            "type": "string",
+                            "title": "Alt Text"
+                          }
+                        ],
+                        "name": "image",
+                        "type": "image",
+                        "title": "Content Image"
+                      },
+                      {
+                        "rows": 4,
+                        "description": "Main description text for this accordion item",
+                        "name": "description",
+                        "type": "text"
+                      },
+                      {
+                        "description": "List of steps or process items",
+                        "of": [
+                          {
+                            "fields": [
+                              {
+                                "options": {
+                                  "hotspot": true
+                                },
+                                "fields": [
+                                  {
+                                    "name": "alt",
+                                    "type": "string",
+                                    "title": "Alt Text"
+                                  }
+                                ],
+                                "name": "icon",
+                                "type": "image",
+                                "title": "Step Icon"
+                              },
+                              {
+                                "validation": [
+                                  {
+                                    "rules": [
+                                      {
+                                        "flag": "presence",
+                                        "constraint": "required"
+                                      }
+                                    ],
+                                    "level": "error"
+                                  }
+                                ],
+                                "name": "text",
+                                "type": "string",
+                                "title": "Step Text"
+                              }
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "name": "steps",
+                        "type": "array"
+                      },
+                      {
+                        "options": {
+                          "hotspot": true
+                        },
+                        "description": "Image showcasing recent work or portfolio item",
+                        "fields": [
+                          {
+                            "name": "alt",
+                            "type": "string",
+                            "title": "Alt Text"
+                          }
+                        ],
+                        "name": "recentWorkImage",
+                        "type": "image"
+                      },
+                      {
+                        "description": "List of tools or technologies used",
+                        "of": [
+                          {
+                            "fields": [
+                              {
+                                "validation": [
+                                  {
+                                    "rules": [
+                                      {
+                                        "flag": "presence",
+                                        "constraint": "required"
+                                      }
+                                    ],
+                                    "level": "error"
+                                  }
+                                ],
+                                "name": "name",
+                                "type": "string",
+                                "title": "Tool Name"
+                              },
+                              {
+                                "options": {
+                                  "hotspot": true
+                                },
+                                "fields": [
+                                  {
+                                    "name": "alt",
+                                    "type": "string",
+                                    "title": "Alt Text"
+                                  }
+                                ],
+                                "name": "image",
+                                "type": "image",
+                                "title": "Tool Image/Logo"
+                              }
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "name": "tools",
+                        "type": "array",
+                        "title": "Tools & Technologies"
+                      }
+                    ],
+                    "name": "content",
+                    "type": "object",
+                    "title": "Accordion Content"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "accordionItems",
+            "type": "array"
+          }
+        ],
+        "name": "accordionSection",
+        "type": "object"
+      },
+      {
+        "fields": [
+          {
+            "name": "titlebfHighlight",
+            "type": "string",
+            "title": "title Before Highlight"
+          },
+          {
+            "name": "titleHigh",
+            "type": "string",
+            "title": "title Highlight"
+          },
+          {
+            "name": "titleAfHighlight",
+            "type": "string",
+            "title": "title After Highlight"
+          },
+          {
+            "name": "descrition",
+            "type": "string",
+            "title": "Description"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "name": "stepNumber",
+                    "type": "number"
+                  },
+                  {
+                    "name": "stepTitle",
+                    "type": "string"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "steps",
+            "type": "array"
+          }
+        ],
+        "name": "streamlinedApproach",
+        "type": "document",
+        "title": "Streamlined Approach Section"
+      }
+    ],
+    "name": "servicesSection",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Page Title"
+      },
+      {
+        "name": "subTitle",
+        "type": "string"
+      },
+      {
+        "fields": [
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "fields": [
+                      {
+                        "name": "alt",
+                        "type": "string",
+                        "title": "Alt Text"
+                      }
+                    ],
+                    "name": "image",
+                    "type": "image"
+                  },
+                  {
+                    "name": "hoverText",
+                    "type": "string"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "imagesWithText",
+            "type": "array",
+            "title": "Images with Hover Text"
+          }
+        ],
+        "name": "lifeStyle",
+        "type": "object",
+        "title": "My LifeStyle"
+      },
+      {
+        "fields": [
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "fields": [
+                      {
+                        "name": "alt",
+                        "type": "string",
+                        "title": "Alt Text"
+                      }
+                    ],
+                    "name": "image",
+                    "type": "image"
+                  },
+                  {
+                    "name": "title",
+                    "type": "string"
+                  },
+                  {
+                    "name": "description",
+                    "type": "text"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "caseStudies",
+            "type": "array"
+          }
+        ],
+        "name": "caseStudiesSection",
+        "type": "document"
+      }
+    ],
+    "name": "blissWithZoya",
+    "type": "document",
+    "title": "Bliss with Zoya "
+  },
+  {
+    "fields": [
+      {
+        "name": "formTitle",
+        "type": "string",
+        "title": "Send me Message Title"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "image",
+        "type": "image",
+        "title": "Form Image"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "email",
+        "type": "email"
+      }
+    ],
+    "name": "contactSection",
+    "type": "document",
+    "title": "Contact Form"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Name of the person giving the review",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Email address of the reviewer",
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "description": "Company or organization name (optional)",
+        "name": "company",
+        "type": "string",
+        "title": "Company/Organization"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "1 Star",
+              "value": 1
+            },
+            {
+              "title": "2 Stars",
+              "value": 2
+            },
+            {
+              "title": "3 Stars",
+              "value": 3
+            },
+            {
+              "title": "4 Stars",
+              "value": 4
+            },
+            {
+              "title": "5 Stars",
+              "value": 5
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 5
+              }
+            ],
+            "level": "error",
+            "message": "Rating must be between 1 and 5"
+          }
+        ],
+        "description": "Rating out of 5",
+        "name": "rating",
+        "type": "number"
+      },
+      {
+        "rows": 5,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 10
+              },
+              {
+                "flag": "max",
+                "constraint": 1000
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The review content",
+        "name": "review",
+        "type": "text",
+        "title": "Review Text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Pending",
+              "value": "pending"
+            },
+            {
+              "title": "Published",
+              "value": "published"
+            },
+            {
+              "title": "Rejected",
+              "value": "rejected"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "pending",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "pending",
+                  "published",
+                  "rejected"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Review status - Pending reviews need approval",
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "description": "When the review was submitted",
+        "readOnly": true,
+        "name": "submittedAt",
+        "type": "datetime"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Profile picture of the reviewer (optional)",
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "reviewerImage",
+        "type": "image"
+      }
+    ],
+    "name": "review",
+    "type": "document",
+    "title": "Reviews"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "title": "Short Description"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "tags",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "content",
+        "type": "array",
+        "title": "Full Content"
+      }
+    ],
+    "name": "post",
+    "type": "document",
+    "title": "Blog Post"
+  }
+]
