@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PortableText } from "@portabletext/react";
 import { client } from "../../sanity/lib/client";
-import { Http2ServerRequest } from "http2";
 const components = {
   block: {
     h1: ({ children }: any) => (
