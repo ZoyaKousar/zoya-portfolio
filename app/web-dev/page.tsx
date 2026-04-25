@@ -3,6 +3,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import YouTubeVideo from "../components/youtubeVideo"
+import { PORTFOLIO_VIDEOS } from "../config/portfolioVideos"
 
 // Project Categories
 const projectCategories = [
@@ -498,6 +499,13 @@ export default function WebDevPortfolioPage() {
               <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto lg:mx-0">
                 I make websites that help businesses make money or get clients plain and simple. Some need to look expensive, some need to load in 1 second, some need to sell courses while people are half-asleep scrolling at night. I use whatever tool gets the job done fastest and looks best for that client. Been doing this long enough that I can usually tell in the first call which platform will save everyone headaches later.
               </p>
+              <div className="mt-6 flex justify-center lg:justify-start">
+                <a href="/cv/web-dev.pdf" download>
+                  <div className="w-[200px] rounded-[50px] bg-gradient-primary px-6 py-3 text-center text-white transition-all bg-gradient-primary-hover">
+                    Download CV
+                  </div>
+                </a>
+              </div>
             </motion.div>
 
             {/* YouTube Video Embed */}
@@ -508,7 +516,7 @@ export default function WebDevPortfolioPage() {
               className="w-full"
             >
               <YouTubeVideo 
-                videoId="YOUR_VIDEO_ID"
+                videoId={PORTFOLIO_VIDEOS.webDev}
                 title="Web Development Portfolio"
               />
               <p className="text-center text-white/50 text-sm mt-3">

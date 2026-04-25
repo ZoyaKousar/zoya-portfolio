@@ -13,8 +13,9 @@ const portfolioItems = [
   { name: "WordPress", href: "/wordpress" },
   { name: "Shopify Case Studies", href: "/shopify-case-studies" },
   { name: "SEO Portfolio", href: "/seo-portfolio" },
+  { name: "Digital Marketing", href: "/digital-marketing" },
   { name: "QA Portfolio", href: "/qa-portfolio" },
-  { name: "Blogs", href: "/blog" },
+  { name: "Blogs", href: "/Blog" },
   // Add more portfolio categories here:
   // { name: "E-commerce", href: "/ecommerce" },
 ];
@@ -75,7 +76,7 @@ const Navigation = () => {
               className="relative"
             >
               <motion.img
-                src="/logozoya.png"
+                src="/zoya-logo-new.png"
                 alt="Logo"
                 className="h-20 sm:h-24 md:h-28"
                 initial={{ opacity: 0, y: -10 }}
@@ -105,7 +106,7 @@ const Navigation = () => {
             >
               <motion.img
                 loading="lazy"
-                src="/logozoya.png"
+                src="/zoya-logo-new.png"
                 className="object-contain h-20 sm:h-24 md:h-28 cursor-pointer"
                 alt="Logo"
                 initial={{ opacity: 0, scale: 0.8 }}

@@ -73,6 +73,125 @@ body {
   color: linear-gradient(to right, #2954A3, #C961DE);
 }
 
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-copy-fade {
+  animation: fadeUp 0.6s ease-out both;
+}
+
+.hero-chip {
+  background: linear-gradient(90deg, rgba(201, 97, 222, 0.25), rgba(41, 84, 163, 0.35));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.92);
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  box-shadow: 0 12px 30px rgba(201, 97, 222, 0.15);
+}
+
+@keyframes heroFloat {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero-portrait {
+  position: relative;
+  width: min(520px, 100%);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  animation: heroFloat 6.5s ease-in-out infinite;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.hero-portrait-glow {
+  position: absolute;
+  inset: -8%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 55%, rgba(201, 97, 222, 0.35), transparent 55%),
+    radial-gradient(circle at 55% 45%, rgba(41, 84, 163, 0.35), transparent 58%),
+    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.65), transparent 55%);
+  filter: blur(18px);
+  opacity: 0.95;
+}
+
+.hero-portrait::after {
+  content: "";
+  position: absolute;
+  inset: -2%;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.14), transparent 55%);
+  mask: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 68%);
+  pointer-events: none;
+}
+
+.hero-portrait-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(201, 97, 222, 0.12) inset;
+}
+
+.hero-fallback-bg {
+  position: relative;
+  background: radial-gradient(circle at 20% 15%, #0ea5e9 0%, #0f172a 48%, #020617 100%);
+  overflow: hidden;
+}
+
+.hero-fallback-bg::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: conic-gradient(from 0deg, rgba(56, 189, 248, 0.25), rgba(99, 102, 241, 0.2), rgba(14, 165, 233, 0.25));
+  animation: slowZoom 14s ease-in-out infinite;
+}
+
+.hero-fallback-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.1), transparent 40%, transparent 60%, rgba(125, 211, 252, 0.2));
+}
+
+.blog-card-animate {
+  animation: fadeUp 0.5s ease-out;
+}
+
 
 @layer utilities {
   .text-balance {

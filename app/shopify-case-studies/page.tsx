@@ -1,6 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import YouTubeVideo from "../components/youtubeVideo"
+import { PORTFOLIO_VIDEOS } from "../config/portfolioVideos"
 
 // Shopify Case Studies Data
 const caseStudies = [
@@ -141,6 +142,13 @@ export default function ShopifyCaseStudiesPage() {
               <p className="text-lg md:text-xl text-white/70 max-w-xl mx-auto lg:mx-0">
                 5+ yrs on Shopify store development. I do custom HTML/CSS/Liquid themes, API stuff, full store setups. I love automating things, keeping products flowing right, and pushing conversions up.
               </p>
+              <div className="mt-6 flex justify-center lg:justify-start">
+                <a href="/cv/shopify.pdf" download>
+                  <div className="w-[200px] rounded-[50px] bg-gradient-primary px-6 py-3 text-center text-white transition-all bg-gradient-primary-hover">
+                    Download CV
+                  </div>
+                </a>
+              </div>
             </motion.div>
 
             {/* YouTube Video Embed */}
@@ -151,7 +159,7 @@ export default function ShopifyCaseStudiesPage() {
               className="w-full"
             >
               <YouTubeVideo 
-                videoId="YOUR_VIDEO_ID"
+                videoId={PORTFOLIO_VIDEOS.shopifyCaseStudies}
                 title="Shopify Case Studies"
               />
               <p className="text-center text-white/50 text-sm mt-3">

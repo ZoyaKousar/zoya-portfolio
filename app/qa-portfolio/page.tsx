@@ -1,6 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 
+
 // Tools & CRM Data
 const toolsCRM = [
   "Selenium WebDriver",
@@ -161,7 +162,6 @@ export default function QAPortfolioPage() {
             </h1>
             <div className="w-32 h-1 bg-white mx-auto mb-6"></div>
           </motion.div>
-
           {/* Summary Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -185,7 +185,14 @@ export default function QAPortfolioPage() {
             </p>
           </motion.div>
         </div>
+    <a href="/cv/full stack.pdf" download>
+  <div className="mt-5 ml-52 text-white text-center w-[200px] px-6 py-3 rounded-[50px] bg-gradient-primary hover:bg-gradient-primary-hover transition-all mb-6">
+    Download CV
+  </div>
+</a>
       </section>
+       
+
 
       {/* Professional Experience Section */}
       <section className="relative py-16 md:py-24 px-4 md:px-8 lg:px-16">

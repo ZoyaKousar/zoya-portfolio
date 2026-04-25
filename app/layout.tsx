@@ -34,6 +34,8 @@ export default function RootLayout({
     "/shopify-case-studies": "/zoyaa-bg.png", // Shopify Case Studies
     "/seo-portfolio": "/zoyaa-bg.png", // SEO Portfolio
     "/qa-portfolio": "/zoyaa-bg.png", // QA Portfolio
+    "/digital-marketing": "/zoyaa-bg.png",
+    "/Blog": "/zoyaa-bg.png", // Blogs
   };
 
   // Define metadata for different paths
@@ -48,11 +50,16 @@ export default function RootLayout({
     "/shopify-case-studies": { title: "Kou | Shopify Case Studies", description: "Shopify Case Studies - B2B Growth, Lead Generation, Cart Abandonment, Multi-Channel Selling, Automation, Optimization" },
     "/seo-portfolio": { title: "Kou | SEO Portfolio", description: "SEO Portfolio - Mastering SEO & Software, Data-Driven SEO, Google Analytics, Search Console, AI-Powered SEO, Organic Traffic Growth" },
     "/qa-portfolio": { title: "Kulsoom Kousar | Senior QA Engineer Portfolio", description: "Senior Quality Assurance Engineer - Selenium, Appium, Cypress, Test Automation, API Testing, CI/CD, Agile, Manual Testing" },
+    "/digital-marketing": { title: "Kou | Digital Marketing Portfolio", description: "Digital marketing — paid social, SEO, email, automation, content, and campaign delivery." },
+    "/Blog": { title: "Zoya Kou | Blog", description: "Latest blogs and insights on AI assistants, automation, and business workflows." },
   };
 
   // Get the background image for the current route
-  const backgroundImage = backgrounds[pathname] || "/zoyaa-bg.png";
-  const currentMetadata = metadata[pathname] || { title: "Zoya Kou | Full Stack Digital Manager", description: "Full Stack Digital Manager, QA Automation, Technical Writing, Web Development, Digital Marketing, Project Management, Virtual Assistant, Zoya Kou" };
+  const isBlogPage = pathname.startsWith("/Blog");
+  const backgroundImage = isBlogPage ? "/zoyaa-bg.png" : (backgrounds[pathname] || "/zoyaa-bg.png");
+  const currentMetadata = isBlogPage
+    ? metadata["/Blog"]
+    : (metadata[pathname] || { title: "Zoya Kou | Full Stack Digital Manager", description: "Full Stack Digital Manager, QA Automation, Technical Writing, Web Development, Digital Marketing, Project Management, Virtual Assistant, Zoya Kou" });
 
   // Dynamically update title and meta description
   useEffect(() => {

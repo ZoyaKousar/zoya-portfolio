@@ -4,6 +4,7 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import YouTubeVideo from "../components/youtubeVideo"
+import { PORTFOLIO_VIDEOS } from "../config/portfolioVideos"
 
 // SEO Expertise Data
 const expertiseData = [
@@ -131,6 +132,13 @@ export default function SEOPortfolioPage() {
               <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto lg:mx-0">
                 Look, I just help brands get more people finding them on Google without paying for every click. I use real SEO tricks that work right now, pull numbers from actual tools, and throw in whatever apps or AI make the job easier and faster. I&apos;ve fixed broken site tech, written or tweaked content that ranks, got local shops popping up in maps, and used AI so I don&apos;t have to redo the same boring tasks every week.
               </p>
+              <div className="mt-6 flex justify-center lg:justify-start">
+                <a href="/cv/seo.pdf" download>
+                  <div className="w-[200px] rounded-[50px] bg-gradient-primary px-6 py-3 text-center text-white transition-all bg-gradient-primary-hover">
+                    Download CV
+                  </div>
+                </a>
+              </div>
             </motion.div>
 
             {/* YouTube Video Embed */}
@@ -141,7 +149,7 @@ export default function SEOPortfolioPage() {
               className="w-full"
             >
               <YouTubeVideo 
-                videoId="YOUR_VIDEO_ID"
+                videoId={PORTFOLIO_VIDEOS.seoPortfolio}
                 title="SEO Portfolio"
               />
               <p className="text-center text-white/50 text-sm mt-3">

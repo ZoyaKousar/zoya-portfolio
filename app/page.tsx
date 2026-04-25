@@ -3,6 +3,7 @@ import ServicesSection from './components/service'
 import Testimonials from './components/testimonials'
 import ContactSection from './components/contactForm'
 import Link from 'next/link'
+import Image from "next/image";
 import { client } from "../sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import TypingAnimation from './components/typingAnimation';
@@ -21,7 +22,7 @@ async function getData() {
       title: "Full Stack Digital Manager",
       description: "Expert in QA Automation, Technical Writing, Web Development, Digital Marketing",
       button1: { link: "#", text: "Contact Me" },
-      button2: { text: "Download CV" },
+      button2: { link: "/cv/general.pdf" , text: "Download CV" },
       image: { asset: { _ref: "" }, alt: "" },
       aboutMeSection: {
         descriptionDsk: "I'm a tech-savvy Virtual Assistant with expertise in multiple domains.",
@@ -145,24 +146,33 @@ const caseStudies = [
 
 export default async function Homepage() {
   const data = await getData();
+  const heroName ="ZOYA KOUSAR";
   return (
     <div className="flex flex-col px-4">
       <div className="flex flex-col w-full max-md:max-w-full">
         {/* HERO SECTION */}
         <section className="mt-32 md:mt-20 py-6 md:py-16  flex flex-col md:flex-row items-center justify-center gap-6 md:min-h-[609px] lg:min-h-[670px] xl:min-h-[730px] max-w-7xl mx-auto">
-          <div className="md:w-1/2 justify-center items-top">
-            <h1 className="text-3xl md:text-5xl text-white font-bold mb-10 leading-tight">
-              <TypingAnimation 
-                text={[
-                  "Smart Growth: <span class='bg-[#2954A3]/60 text-white px-2 py-1 rounded'>Full-Stack + CRM</span>",
-                  "Results with <span class='bg-[#2954A3]/60 text-white px-2 py-1 rounded'>WordPress, Shopify & Ads</span>",
-                  "Leads & Sales through <span class='bg-[#2954A3]/60 text-white px-2 py-1 rounded'>SEO Automation</span>"
-                ]} 
-                speed={50} 
-                deleteSpeed={30}
-                pauseTime={1500}
-              />
-            </h1>
+          <div className="md:w-1/2 w-full justify-center md:justify-end items-center self-center">
+            <div className="hero-copy-fade">
+              <p className="text-white/80 tracking-wide text-base md:text-base mb-3">
+                Hello, I&apos;m
+              </p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl text-white font-extrabold leading-[1.05]">
+                <span className="text-gradient-primary">{heroName}</span>
+              </h1>
+              <div className="mt-5 text-2xl sm:text-3xl md:text-4xl text-white font-bold leading-tight">
+                <TypingAnimation
+                  text={[
+                    "Smart Growth: <span class='hero-chip'>Full-Stack + CRM</span>",
+                    "Results with <span class='hero-chip'>WordPress, Shopify & Ads</span>",
+                    "Leads & Sales through <span class='hero-chip'>SEO Automation</span>"
+                  ]}
+                  speed={50}
+                  deleteSpeed={30}
+                  pauseTime={1500}
+                />
+              </div>
+            </div>
             <p className="text-base md:text-lg mb-10 text-white" style={{ opacity: 0.8 }}>
               {data?.description || "Expert in QA Automation, Technical Writing, Web Development"}
             </p>
@@ -176,7 +186,7 @@ export default async function Homepage() {
                   {data.button1?.text || "Contact Me"}
                 </Link>
               )}
-              <a href="Zoya Kou  Full Stack Digital Manager & Tech-Savvy Virtual Assistant.pdf" download>
+              <a href="/cv/general.pdf" download>
                 <div className="text-white text-center w-[200px] px-6 py-3 rounded-[50px] bg-gradient-primary bg-gradient-primary-hover transition-all">
                   {data?.button2?.text || "Download CV"}
                 </div>
@@ -184,15 +194,19 @@ export default async function Homepage() {
 
             </div>
           </div>
-          {data?.image && (
-            <div className="md:w-1/2 flex justify-end items-center self-center">
-              <img
-                src={urlFor(data.image).url()}
-                alt={data.image?.alt || "Hero image"}
-                className="h-[350px] md:h-[450px] rounded-lg"
+        <div className="md:w-1/2 w-full flex justify-center md:justify-end items-center self-center">
+       <div className="hero-portrait">
+              <div className="hero-portrait-glow" aria-hidden="true" />
+              <Image
+                src="/213.jpeg"
+                alt="Hero portrait"               
+                width={320}
+                height={520}
+                priority
+                className="hero-portrait-img"
               />
             </div>
-          )}
+          </div>
         </section>
 
         {/* Experience */}

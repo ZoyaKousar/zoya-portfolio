@@ -2,6 +2,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import YouTubeVideo from "../components/youtubeVideo"
+import { PORTFOLIO_VIDEOS } from "../config/portfolioVideos"
 
 // Core Skills
 const coreSkills = [
@@ -116,6 +117,13 @@ export default function PortfolioPage() {
               <p className="text-lg md:text-xl text-white/70 max-w-xl mx-auto lg:mx-0">
                 I&apos;m a Full Stack Developer who loves building digital products that just work fast, solid, and easy for the next person to take care of.
               </p>
+              <div className="mt-6 flex justify-center lg:justify-start">
+                <a href="/cv/full stack.pdf" download>
+                  <div className="w-[200px] rounded-[50px] bg-gradient-primary px-6 py-3 text-center text-white transition-all bg-gradient-primary-hover">
+                    Download CV
+                  </div>
+                </a>
+              </div>
             </motion.div>
 
             {/* YouTube Video Embed */}
@@ -126,7 +134,7 @@ export default function PortfolioPage() {
               className="w-full"
             >
               <YouTubeVideo 
-                videoId="YOUR_VIDEO_ID"
+                videoId={PORTFOLIO_VIDEOS.fullStack}
                 title="Portfolio Showcase"
               />
               <p className="text-center text-white/50 text-sm mt-3">

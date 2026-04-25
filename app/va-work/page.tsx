@@ -3,6 +3,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import YouTubeVideo from "../components/youtubeVideo"
+import { PORTFOLIO_VIDEOS } from "../config/portfolioVideos"
 
 // Work Experience Data
 const workExperience = [
@@ -280,7 +281,14 @@ export default function VAWorkPage() {
               <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto lg:mx-0 mb-4">
                 Need someone who actually pays attention and catches problems early? That&apos;s me
               </p>
-              <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto lg:mx-0">
+              <div className="mt-6 flex justify-center lg:justify-start">
+                <a href="/cv/va.pdf" download>
+                  <div className="w-[200px] rounded-[50px] bg-gradient-primary px-6 py-3 text-center text-white transition-all bg-gradient-primary-hover">
+                    Download CV
+                  </div>
+                </a>
+              </div>
+              <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto lg:mx-0 mt-6">
                 Watch my introduction video to learn more about my expertise and how I can help your business grow.
               </p>
             </motion.div>
@@ -293,7 +301,7 @@ export default function VAWorkPage() {
               className="w-full"
             >
               <YouTubeVideo 
-                videoId="YOUR_VIDEO_ID"
+                videoId={PORTFOLIO_VIDEOS.vaWork}
                 title="Virtual Assistant Introduction"
               />
               <p className="text-center text-white/50 text-sm mt-3">

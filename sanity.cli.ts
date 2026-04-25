@@ -8,5 +8,7 @@ export default defineCliConfig({
   api: {
     projectId: "r0q6w8hr",   
     dataset: "production"
-  }
+   
+  },
+    studioHost: 'zoya'
 })

@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import YouTubeVideo from "../components/youtubeVideo"
+import { PORTFOLIO_VIDEOS } from "../config/portfolioVideos"
 
 // Projects Data
 const projects = [
@@ -192,6 +193,13 @@ export default function WordPressPortfolioPage() {
               <p className="text-lg md:text-xl text-white/70 max-w-xl mx-auto lg:mx-0">
                 6+ Years of Experience in WordPress Theme & Plugin Development, Customization, and Optimization
               </p>
+              <div className="mt-6 flex justify-center lg:justify-start">
+                <a href="/cv/wordpress.pdf" download>
+                  <div className="w-[200px] rounded-[50px] bg-gradient-primary px-6 py-3 text-center text-white transition-all bg-gradient-primary-hover">
+                    Download CV
+                  </div>
+                </a>
+              </div>
             </motion.div>
 
             {/* YouTube Video Embed */}
@@ -202,7 +210,7 @@ export default function WordPressPortfolioPage() {
               className="w-full"
             >
               <YouTubeVideo 
-                videoId="YOUR_VIDEO_ID"
+                videoId={PORTFOLIO_VIDEOS.wordpress}
                 title="WordPress Development Portfolio"
               />
               <p className="text-center text-white/50 text-sm mt-3">
