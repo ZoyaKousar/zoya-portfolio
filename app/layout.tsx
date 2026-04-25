@@ -35,7 +35,7 @@ export default function RootLayout({
     "/seo-portfolio": "/zoyaa-bg.png", // SEO Portfolio
     "/qa-portfolio": "/zoyaa-bg.png", // QA Portfolio
     "/digital-marketing": "/zoyaa-bg.png",
-    "/Blog": "/zoyaa-bg.png", // Blogs
+    "/blog": "/zoyaa-bg.png", // Blogs
   };
 
   // Define metadata for different paths
@@ -51,14 +51,14 @@ export default function RootLayout({
     "/seo-portfolio": { title: "Kou | SEO Portfolio", description: "SEO Portfolio - Mastering SEO & Software, Data-Driven SEO, Google Analytics, Search Console, AI-Powered SEO, Organic Traffic Growth" },
     "/qa-portfolio": { title: "Kulsoom Kousar | Senior QA Engineer Portfolio", description: "Senior Quality Assurance Engineer - Selenium, Appium, Cypress, Test Automation, API Testing, CI/CD, Agile, Manual Testing" },
     "/digital-marketing": { title: "Kou | Digital Marketing Portfolio", description: "Digital marketing — paid social, SEO, email, automation, content, and campaign delivery." },
-    "/Blog": { title: "Zoya Kou | Blog", description: "Latest blogs and insights on AI assistants, automation, and business workflows." },
+    "/blog": { title: "Zoya Kou | Blog", description: "Latest blogs and insights on AI assistants, automation, and business workflows." },
   };
 
   // Get the background image for the current route
-  const isBlogPage = pathname.startsWith("/Blog");
+  const isBlogPage = pathname.startsWith("/blog");
   const backgroundImage = isBlogPage ? "/zoyaa-bg.png" : (backgrounds[pathname] || "/zoyaa-bg.png");
   const currentMetadata = isBlogPage
-    ? metadata["/Blog"]
+    ? metadata["/blog"]
     : (metadata[pathname] || { title: "Zoya Kou | Full Stack Digital Manager", description: "Full Stack Digital Manager, QA Automation, Technical Writing, Web Development, Digital Marketing, Project Management, Virtual Assistant, Zoya Kou" });
 
   // Dynamically update title and meta description

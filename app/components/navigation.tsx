@@ -15,7 +15,7 @@ const portfolioItems = [
   { name: "SEO Portfolio", href: "/seo-portfolio" },
   { name: "Digital Marketing", href: "/digital-marketing" },
   { name: "QA Portfolio", href: "/qa-portfolio" },
-  { name: "Blogs", href: "/Blog" },
+  { name: "Blogs", href: "/blog" },
   // Add more portfolio categories here:
   // { name: "E-commerce", href: "/ecommerce" },
 ];

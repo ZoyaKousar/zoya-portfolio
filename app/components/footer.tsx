@@ -22,7 +22,7 @@ export default function Footer() {
                     <Link href="/portfolio" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/portfolio")} hover:text-fuchsia-400`}>
                         Portfolio
                     </Link>
-                     <Link href="/Blog" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/Blog")} hover:text-fuchsia-400`}>
+                     <Link href="/blog" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/blog")} hover:text-fuchsia-400`}>
                         Blog
                     </Link>
                     <Link href="/shopify-case-studies" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/shopify-case-studies")} hover:text-fuchsia-400`}>
