@@ -5,13 +5,18 @@ import { studioAuthToken } from "./sanity/env";
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
-  // Redirect `/Blog` (capital) to `/blog` so it works on Linux deploys.
-  if (pathname.startsWith("/Blog")) {
+  // Blog route casing: keep app folder as `Blog`, but allow `/blog` and `/Blog`.
+  // (Windows is case-insensitive; most deploys are case-sensitive.)
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) {
     const url = request.nextUrl.clone();
-    const rest = pathname.slice("/Blog".length);
-    url.pathname = rest ? `/blog${rest}` : "/blog";
+    url.pathname = `/Blog${pathname.slice("/blog".length)}` || "/Blog";
     url.search = search;
     return NextResponse.redirect(url);
+  }
+
+  if (pathname === "/Blog" || pathname.startsWith("/Blog/")) {
+    // Canonical path is `/Blog` (matches folder name)
+    return NextResponse.next();
   }
 
   // Skip authentication check for login page and API routes
@@ -33,5 +38,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/Blog/:path*", "/studio/:path*", "/studio"],
+  matcher: ["/blog/:path*", "/blog", "/Blog/:path*", "/Blog", "/studio/:path*", "/studio"],
 };

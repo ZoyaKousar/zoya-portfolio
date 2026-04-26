@@ -15,7 +15,7 @@ const portfolioItems = [
   { name: "SEO Portfolio", href: "/seo-portfolio" },
   { name: "Digital Marketing", href: "/digital-marketing" },
   { name: "QA Portfolio", href: "/qa-portfolio" },
-  { name: "Blogs", href: "/blog" },
+  { name: "Blogs", href: "/Blog" },
   // Add more portfolio categories here:
   // { name: "E-commerce", href: "/ecommerce" },
 ];
@@ -29,7 +29,7 @@ const Navigation = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setActiveLink(pathname);
+    setActiveLink(pathname ?? "");
   }, [pathname]);
 
   // Close dropdown when clicking outside
