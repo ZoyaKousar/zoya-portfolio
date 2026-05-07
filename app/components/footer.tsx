@@ -2,84 +2,84 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const FOOTER_LINKS: { href: string; label: string }[] = [
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
+    { href: "/portfolio", label: "Portfolio" },
+    { href: "/Blog", label: "Blog" },
+    { href: "/shopify-case-studies", label: "Shopify Case Studies" },
+    { href: "/seo-portfolio", label: "SEO Portfolio" },
+    { href: "/digital-marketing", label: "Digital Marketing" },
+    { href: "/qa-portfolio", label: "QA Portfolio" },
+    { href: "/blissWithZoya", label: "Bliss with Zoya" },
+];
+
 export default function Footer() {
     const pathname = usePathname();
 
-    const isActiveLink = (path: string) => pathname === path ? "text-[#C961DE]" : "text-white";
-
     return (
-        <div className="flex flex-col items-center justify-between px-16 py-6 w-full min-h-[289px] rounded-tl-3xl rounded-tr-3xl bg-[#2F2F8A] bg-opacity-10 border border-solid border-white border-opacity-10 backdrop-blur-md max-md:px-5 max-md:max-w-full">
+        <div className="flex flex-col items-center justify-between px-16 py-6 w-full min-h-[289px] rounded-tl-3xl rounded-tr-3xl bg-[#2F2F8A] bg-opacity-10 border border-solid border-white border-opacity-10 backdrop-blur-md max-md:px-6 max-md:py-8 max-md:max-w-full">
 
-            {/* Center Section - Menu */}
-            <div className="flex flex-col items-center mt-6 w-full">
-                <div className="flex text-sm justify-center gap-10 text-base tracking-tight text-gray-50 mb-6 leading-50px flex-wrap">
-                    <Link href="/" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/")} hover:text-fuchsia-400`}>
-                        Home
-                    </Link>
-                    <Link href="/services" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/services")} hover:text-fuchsia-400`}>
-                        Services
-                    </Link>
-                    <Link href="/portfolio" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/portfolio")} hover:text-fuchsia-400`}>
-                        Portfolio
-                    </Link>
-                     <Link href="/Blog" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/Blog")} hover:text-fuchsia-400`}>
-                        Blog
-                    </Link>
-                    <Link href="/shopify-case-studies" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/shopify-case-studies")} hover:text-fuchsia-400`}>
-                        Shopify Case Studies
-                    </Link>
-                    <Link href="/seo-portfolio" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/seo-portfolio")} hover:text-fuchsia-400`}>
-                        SEO Portfolio
-                    </Link>
-                    <Link href="/digital-marketing" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/digital-marketing")} hover:text-fuchsia-400`}>
-                        Digital Marketing
-                    </Link>
-                    <Link href="/qa-portfolio" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/qa-portfolio")} hover:text-fuchsia-400`}>
-                        QA Portfolio
-                    </Link>
-                    <Link href="/blissWithZoya" className={`cursor-pointer text-sm md:text-lg transition-colors duration-300 ${isActiveLink("/blissWithZoya")} hover:text-fuchsia-400`}>
-                        Bliss with Zoya
-                    </Link>
-                </div>
-                {/* Logo Section */}
-                <div className="flex justify-center gap-8 mt-4">
-                    {/* <a href="https://www.upwork.com/freelancers/~01823bc1bb1258ae0a?mp_source=share" target="_blank" rel="noopener noreferrer">
-                        <img
-                            src="/footer-upwork.png"
-                            alt="Upwork"
-                            className="h-10 object-contain"
-                        />
-                    </a> */}
-                    {/* <a href="https://www.fiverr.com/zoyakousar?up_rollout=true" target="_blank" rel="noopener noreferrer">
-                        <img
-                            src="/footer-fiverr.png"
-                            alt="Fiverr"
-                            className="h-10 object-contain"
-                        />
-                    </a> */}
-                    <Link href="https://www.linkedin.com/in/zoyaadnan" target="_blank" rel="noopener noreferrer">
+            <div className="flex flex-col items-start mt-4 w-full max-w-6xl mx-auto max-md:mx-0 md:mt-6 md:items-center">
+                <p className="mb-3 px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/50 md:hidden">
+                    Explore
+                </p>
+                <nav
+                    className="flex flex-col gap-0.5 mb-8 w-full px-2 text-left md:mb-6 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-x-6 md:gap-y-2 md:text-center"
+                    aria-label="Footer"
+                >
+                    {FOOTER_LINKS.map(({ href, label }) => {
+                        const active = pathname === href;
+                        return (
+                            <Link
+                                key={href}
+                                href={href}
+                                className={[
+                                    "inline-flex min-h-[44px] w-full items-center justify-start rounded-lg px-2 py-2 -mx-2 text-base font-medium leading-snug tracking-normal transition-colors duration-200 md:min-h-0 md:w-auto md:justify-center md:px-1 md:py-1.5 md:text-lg md:mx-0",
+                                    active
+                                        ? "border-l-[3px] border-fuchsia-400 bg-white/5 pl-3 text-fuchsia-200 md:border-l-0 md:border-b-2 md:border-fuchsia-400 md:bg-transparent md:pb-1 md:pl-2"
+                                        : "border-l-[3px] border-transparent pl-3 text-white/90 hover:text-fuchsia-200 md:border-l-0 md:border-b-2 md:border-transparent md:pl-2 md:hover:border-fuchsia-400/40",
+                                ].join(" ")}
+                            >
+                                {label}
+                            </Link>
+                        );
+                    })}
+                </nav>
+
+                <div className="flex w-full items-center justify-start gap-5 border-t border-white/15 pt-6 px-2 md:justify-center md:border-t-0 md:pt-0 md:px-0">
+                    <Link
+                        href="https://www.linkedin.com/in/zoyaadnan"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/15 transition hover:bg-white/15 hover:ring-fuchsia-400/30"
+                        aria-label="LinkedIn profile"
+                    >
                         <img
                             src="/footer-linkedin.png"
-                            alt="LinkedIn"
-                            className="h-10 object-contain"
+                            alt=""
+                            className="h-6 w-6 object-contain"
                         />
                     </Link>
-                    <Link href="https://github.com/ZoyaKousar" target="_blank" rel="noopener noreferrer">
+                    <Link
+                        href="https://github.com/ZoyaKousar"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/15 transition hover:bg-white/15 hover:ring-fuchsia-400/30"
+                        aria-label="GitHub profile"
+                    >
                         <img
                             src="/github-icon.png"
-                            alt="Github"
-                            className="h-10 object-contain"
+                            alt=""
+                            className="h-6 w-6 object-contain"
                         />
                     </Link>
                 </div>
-
             </div>
 
-            {/* Divider */}
-            <div className="w-full border-t border-white border-opacity-20"></div>
+            <div className="mt-8 w-full border-t border-white/25 md:mt-6" />
 
-            {/* Bottom Section - Copyright */}
-            <div className="w-full text-center text-sm text-white">
+            <div className="w-full px-2 pt-4 text-center text-xs leading-relaxed text-white/75 md:text-sm md:text-white/85">
                 © 2026 Zoya. All Rights Reserved.
             </div>
         </div>
