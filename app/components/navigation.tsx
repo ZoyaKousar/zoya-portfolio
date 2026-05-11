@@ -15,7 +15,6 @@ const portfolioItems = [
   { name: "SEO Portfolio", href: "/seo-portfolio" },
   { name: "Digital Marketing", href: "/digital-marketing" },
   { name: "QA Portfolio", href: "/qa-portfolio" },
-  { name: "Blogs", href: "/Blog" },
   // Add more portfolio categories here:
   // { name: "E-commerce", href: "/ecommerce" },
 ];
@@ -52,20 +51,29 @@ const Navigation = () => {
     setIsMobilePortfolioOpen(false);
   };
 
+  const navPillBase =
+    "nav-link-hover inline-flex cursor-pointer items-center justify-center rounded-full border border-transparent px-5 py-2.5 text-base font-semibold tracking-tight transition-all duration-300 ease-out will-change-transform xl:px-8 xl:text-lg";
+
+  const navInactiveHover =
+    "text-white/90 hover:-translate-y-0.5 hover:border-fuchsia-400/65 hover:bg-fuchsia-600/25 hover:text-white hover:shadow-md hover:shadow-fuchsia-900/25";
+
+  const navActiveStyles =
+    "text-gradient-primary border-fuchsia-400/45 bg-white/[0.1] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:border-fuchsia-400/75 hover:bg-fuchsia-600/20";
+
   const getNavLinkClass = (link: string) => {
-    const isActive = activeLink === link || (link !== "/" && activeLink.startsWith(link));
-    return `nav-link-hover cursor-pointer px-4 xl:px-10 rounded-full ${
-      isActive
-      ? "text-gradient-primary"
-      : "text-white"
-    }`;
+    const isActive =
+      activeLink === link ||
+      (link !== "/" && activeLink.startsWith(link));
+    return `${navPillBase} ${isActive ? navActiveStyles : navInactiveHover}`;
   };
 
   const isPortfolioActive = portfolioItems.some(item => activeLink === item.href);
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-between lg:justify-center items-center px-6 py-5 bg-[#0F103F] max-w-8xl mx-auto">
+      <div className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#0a0c2e]/82 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-fuchsia-500/35 to-transparent" aria-hidden />
+        <div className="relative mx-auto flex max-w-[90rem] items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:justify-center">
         {/* Mobile Logo */}
         <div className="lg:hidden flex items-center">
           <Link href="/">
@@ -73,7 +81,7 @@ const Navigation = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="relative"
+              className="relative rounded-2xl border border-transparent px-1 py-0.5 transition-colors duration-300 hover:border-fuchsia-400/55 hover:bg-fuchsia-600/20"
             >
               <motion.img
                 src="/zoya-logo-new.png"
@@ -89,25 +97,28 @@ const Navigation = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex gap-6 items-center text-xl">
+        <div className="hidden items-center gap-2 lg:flex xl:gap-3">
           <Link href="/" onClick={() => setActiveLink("/")}>
             <div className={getNavLinkClass("/")}>Home</div>
           </Link>
           <Link href="/services" onClick={() => setActiveLink("/services")}>
             <div className={getNavLinkClass("/services")}>Services</div>
           </Link>
-         
+          <Link href="/Blog" onClick={() => setActiveLink("/Blog")}>
+            <div className={getNavLinkClass("/Blog")}>Blog</div>
+          </Link>
+
           <Link href="/">
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="relative"
+              className="relative rounded-2xl border border-transparent px-2 py-1 transition-colors duration-300 hover:border-fuchsia-400/55 hover:bg-fuchsia-600/20"
             >
               <motion.img
                 loading="lazy"
                 src="/zoya-logo-new.png"
-                className="object-contain h-20 sm:h-24 md:h-28 cursor-pointer"
+                className="h-20 cursor-pointer object-contain sm:h-24 md:h-28"
                 alt="Logo"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -123,11 +134,10 @@ const Navigation = () => {
           {/* Portfolio Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
+              type="button"
               onClick={() => setIsPortfolioOpen(!isPortfolioOpen)}
-              className={`nav-link-hover cursor-pointer px-4 xl:px-10 rounded-full flex items-center gap-2 ${
-                isPortfolioActive
-                  ? "text-gradient-primary"
-                  : "text-white"
+              className={`${navPillBase} flex items-center gap-2 ${
+                isPortfolioActive ? navActiveStyles : navInactiveHover
               }`}
             >
               Portfolio
@@ -143,7 +153,7 @@ const Navigation = () => {
             
             {/* Dropdown Menu */}
             {isPortfolioOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0F103F] border border-blue-800/50 rounded-xl shadow-2xl shadow-fuchsia-500/10 overflow-hidden z-50">
+              <div className="absolute left-1/2 top-full z-50 mt-3 w-[min(100vw-2rem,16rem)] -translate-x-1/2 overflow-hidden rounded-2xl border border-fuchsia-500/25 bg-[#0c0e38]/95 py-1.5 shadow-2xl shadow-fuchsia-500/25 backdrop-blur-xl">
                 {portfolioItems.map((item) => (
                   <Link
                     key={item.href}
@@ -154,10 +164,10 @@ const Navigation = () => {
                     }}
                   >
                     <div
-                      className={`px-6 py-3 transition-colors duration-300 ease-in-out ${
+                      className={`mx-1.5 rounded-xl border border-transparent px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
                         activeLink === item.href
-                          ? "bg-fuchsia-500/20 text-fuchsia-400"
-                          : "text-white/80 hover:bg-fuchsia-500/20 hover:text-fuchsia-400"
+                          ? "border-fuchsia-400/45 bg-gradient-to-r from-fuchsia-600/25 to-indigo-600/25 text-fuchsia-200 shadow-inner hover:border-fuchsia-400/70 hover:from-fuchsia-600/35 hover:to-indigo-600/35"
+                          : "text-white/85 hover:border-fuchsia-400/50 hover:bg-fuchsia-600/20 hover:text-fuchsia-100"
                       }`}
                     >
                       {item.name}
@@ -183,39 +193,67 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Menu Icon */}
-        <button onClick={toggleSidebar} className="lg:hidden p-2">
+        <button
+          type="button"
+          onClick={toggleSidebar}
+          className="rounded-full border border-white/20 bg-white/10 p-2.5 transition-all duration-300 hover:border-fuchsia-400/70 hover:bg-fuchsia-600/30 hover:shadow-md hover:shadow-fuchsia-900/30 lg:hidden"
+          aria-expanded={isSidebarOpen}
+          aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+        >
           <img
             src={isSidebarOpen ? "/cross-icon.svg" : "/main-menu.png"}
-            alt={isSidebarOpen ? "Close Menu" : "Open Menu"}
-            className="w-6 h-6"
+            alt=""
+            className="h-6 w-6"
           />
         </button>
+        </div>
       </div>
 
       {/* Sidebar for Mobile */}
       {isSidebarOpen && (
-        <div className="fixed inset-0 bg-black/50 z-40" onClick={closeSidebar}>
+        <div className="fixed inset-0 z-40 bg-black/55 backdrop-blur-sm" onClick={closeSidebar}>
           <div
-            className="fixed right-0 top-0 h-full bg-[#0F103F] text-white w-64 p-8 z-50"
+            className="fixed right-0 top-0 z-50 h-full w-[min(100%,18rem)] border-l border-fuchsia-500/20 bg-[#0a0c2e]/96 p-6 pt-24 text-white shadow-[-16px_0_48px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:w-72 sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
-            <ul className="space-y-6 mt-[90px]">
-              <li onClick={closeSidebar}>
-                <Link href="/" className={getNavLinkClass("/")}>Home</Link>
+            <ul className="mt-2 space-y-1">
+              <li onClick={closeSidebar} className="rounded-xl px-1">
+                <Link
+                  href="/"
+                  className={`${getNavLinkClass("/")} flex w-full justify-start`}
+                >
+                  Home
+                </Link>
               </li>
-              <li onClick={closeSidebar}>
-                <Link href="/services" className={getNavLinkClass("/services")}>Services</Link>
+              <li onClick={closeSidebar} className="rounded-xl px-1">
+                <Link
+                  href="/services"
+                  className={`${getNavLinkClass("/services")} flex w-full justify-start`}
+                >
+                  Services
+                </Link>
               </li>
-        
+              <li onClick={closeSidebar} className="rounded-xl px-1">
+                <Link
+                  href="/Blog"
+                  className={`${getNavLinkClass("/Blog")} flex w-full justify-start`}
+                >
+                  Blog
+                </Link>
+              </li>
+
               {/* Mobile Portfolio Dropdown */}
               <li>
                 <button
+                  type="button"
                   onClick={() => setIsMobilePortfolioOpen(!isMobilePortfolioOpen)}
-                  className={`w-full flex items-center justify-between ${
-                    isPortfolioActive ? "text-fuchsia-400" : "text-white"
+                  className={`flex w-full items-center justify-between rounded-xl border border-transparent px-3 py-3 transition-all duration-300 ${
+                    isPortfolioActive
+                      ? "border-fuchsia-400/45 bg-fuchsia-600/20 text-fuchsia-200 hover:border-fuchsia-400/70 hover:bg-fuchsia-600/30"
+                      : "text-white/90 hover:border-fuchsia-400/55 hover:bg-fuchsia-600/25"
                   }`}
                 >
-                  <span className="px-4 py-3">Portfolio</span>
+                  <span className="font-semibold">Portfolio</span>
                   <svg
                     className={`w-4 h-4 mr-4 transition-transform ${isMobilePortfolioOpen ? "rotate-180" : ""}`}
                     fill="none"
@@ -227,15 +265,15 @@ const Navigation = () => {
                 </button>
                 
                 {isMobilePortfolioOpen && (
-                  <ul className="ml-4 mt-2 space-y-2 border-l-2 border-fuchsia-500/30 pl-4">
+                  <ul className="ml-1 mt-2 space-y-1 border-l-2 border-fuchsia-500/40 py-1 pl-3">
                     {portfolioItems.map((item) => (
                       <li key={item.href} onClick={closeSidebar}>
                         <Link
                           href={item.href}
-                          className={`block py-2 text-sm ${
+                          className={`block rounded-lg border border-transparent py-2.5 pl-2 text-sm font-medium transition-all duration-200 ${
                             activeLink === item.href
-                              ? "text-fuchsia-400"
-                              : "text-white/70 hover:text-fuchsia-400"
+                              ? "border-fuchsia-400/45 bg-fuchsia-600/20 text-fuchsia-100 hover:border-fuchsia-400/65 hover:bg-fuchsia-600/30"
+                              : "text-white/75 hover:border-fuchsia-400/45 hover:bg-fuchsia-600/20 hover:text-fuchsia-100"
                           }`}
                         >
                           {item.name}
@@ -246,7 +284,7 @@ const Navigation = () => {
                 )}
               </li>
              
-              <li onClick={closeSidebar}>
+              <li onClick={closeSidebar} className="rounded-xl px-1">
                 <ScrollLink
                   to="contact"
                   spy={true}
@@ -254,7 +292,7 @@ const Navigation = () => {
                   offset={-50}
                   duration={500}
                   hashSpy={true}
-                  className={getNavLinkClass("#contact")}
+                  className={`${getNavLinkClass("#contact")} flex w-full cursor-pointer justify-start`}
                 >
                   Contact
                 </ScrollLink>
