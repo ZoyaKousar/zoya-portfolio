@@ -91,38 +91,43 @@ const ContactSection = () => {
   });
 
   return (
-    <div id="contact" className="flex overflow-hidden mx-auto max-w-[1400px] gap-10 items-center lg:px-32 py-7 lg:py-40 ">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-[#2F2F8A] bg-opacity-60 border border-solid border-white border-opacity-10 backdrop-blur-md rounded-2xl overflow-hidden">
+    <div
+      id="contact"
+      className="mx-auto flex max-w-[1400px] items-center gap-10 overflow-hidden py-7 lg:px-32 lg:py-40"
+    >
+      <div className="flex w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-gray-200/90 bg-white shadow-2xl shadow-gray-300/40 md:flex-row">
         {/* Left Column - Image and Info */}
-        <div className="flex flex-col items-center justify-center w-full lg:w-1/2 bg-cover bg-center p-3 lg:p-12">
-          {/* Image */}
-            <img
-              src="/zoya-contact.png"
-              alt="Email"
-              className="h-[350px] rounded-full object-cover mb-6" />
-          {/* Heading */}
-          <h2 className="text-2xl font-bold text-white mb-4">{data?.title}</h2>
-          {/* Description */}
-          <p className="text-sm text-gray-300 text-center mb-6 md:px-4">
-            {data?.description}          </p>
-          {/* Email with Icon */}
-          <div className="flex items-center space-x-2">
-            <img src="/zoya-email.png" alt="Email Icon" className="h-7" />
-            <span className="text-sm text-white"> {data?.email}    </span>
+        <div className="flex w-full flex-col items-center justify-center border-b border-gray-100 bg-gradient-to-b from-zinc-50 to-white bg-cover bg-center p-6 md:border-b-0 md:border-r lg:w-1/2 lg:p-12">
+          <img
+            src="/zoya-contact.png"
+            alt="Email"
+            className="mb-6 h-[280px] rounded-full object-cover sm:h-[320px] md:h-[350px]"
+          />
+          <h2 className="mb-3 text-center text-2xl font-bold tracking-tight text-zinc-900 md:text-3xl">
+            {data?.title}
+          </h2>
+          <p className="mb-6 max-w-md text-center text-sm leading-relaxed text-zinc-600 md:px-4 md:text-base">
+            {data?.description}
+          </p>
+          <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 shadow-sm">
+            <img src="/zoya-email.png" alt="Email" className="h-7 w-7 object-contain" />
+            <span className="text-sm font-semibold text-zinc-900">{data?.email}</span>
           </div>
         </div>
 
         {/* Right Column - Contact Form */}
-        <div className="flex flex-col w-full lg:w-1/2 p-3 lg:p-12">
-          <div className="flex flex-col w-full text-white">
-            <div className="mt-2 text-2xl leading-tight">
+        <div className="flex w-full flex-col bg-white p-6 lg:w-1/2 lg:p-12">
+          <div className="w-full">
+            <h3 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-zinc-900 md:text-3xl">
               {data?.formTitle}
-            </div>
+            </h3>
           </div>
 
-          {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col mt-8 w-full text-sm text-orange-200">
-            <div className="px-4 py-2 w-full bg-white bg-opacity-20 border border-solid border-white border-opacity-10 rounded-xl">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-8 flex w-full flex-col text-sm text-zinc-800"
+          >
+            <div className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 transition-colors focus-within:border-fuchsia-400/60 focus-within:bg-white focus-within:ring-2 focus-within:ring-fuchsia-500/20">
               <input
                 type="text"
                 placeholder="Name"
@@ -131,14 +136,14 @@ const ContactSection = () => {
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="w-full p-2 bg-transparent text-white outline-none"
+                className="w-full bg-transparent p-2 text-zinc-900 outline-none placeholder:text-zinc-400"
               />
             </div>
             {errors.name && touched.name && (
-              <div className="text-red-500 text-xs">{errors.name}</div>
+              <div className="mt-1 text-xs font-medium text-red-600">{errors.name}</div>
             )}
 
-            <div className="px-4 py-2 mt-5 w-full bg-white bg-opacity-20 border border-solid border-white border-opacity-10 rounded-xl">
+            <div className="mt-5 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 transition-colors focus-within:border-fuchsia-400/60 focus-within:bg-white focus-within:ring-2 focus-within:ring-fuchsia-500/20">
               <input
                 type="email"
                 placeholder="Email"
@@ -147,14 +152,14 @@ const ContactSection = () => {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="w-full p-2 bg-transparent text-white outline-none"
+                className="w-full bg-transparent p-2 text-zinc-900 outline-none placeholder:text-zinc-400"
               />
             </div>
             {errors.email && touched.email && (
-              <div className="text-red-500 text-xs">{errors.email}</div>
+              <div className="mt-1 text-xs font-medium text-red-600">{errors.email}</div>
             )}
 
-            <div className="px-4 py-2 mt-5 w-full bg-white bg-opacity-20 border border-solid border-white border-opacity-10 rounded-xl">
+            <div className="mt-5 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 transition-colors focus-within:border-fuchsia-400/60 focus-within:bg-white focus-within:ring-2 focus-within:ring-fuchsia-500/20">
               <input
                 type="text"
                 placeholder="Subject"
@@ -163,12 +168,11 @@ const ContactSection = () => {
                 value={values.subject}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="w-full p-2 bg-transparent text-white outline-none"
+                className="w-full bg-transparent p-2 text-zinc-900 outline-none placeholder:text-zinc-400"
               />
             </div>
 
-
-            <div className="px-4 py-2 mb-2 mt-5 w-full bg-white bg-opacity-20 border border-solid border-white border-opacity-10 rounded-xl">
+            <div className="mb-2 mt-5 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 transition-colors focus-within:border-fuchsia-400/60 focus-within:bg-white focus-within:ring-2 focus-within:ring-fuchsia-500/20">
               <textarea
                 id="message"
                 placeholder="Message"
@@ -176,7 +180,7 @@ const ContactSection = () => {
                 value={values.message}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="w-full p-2 bg-transparent text-white outline-none"
+                className="w-full resize-y bg-transparent p-2 text-zinc-900 outline-none placeholder:text-zinc-400"
                 rows={5}
               />
             </div>
@@ -184,7 +188,7 @@ const ContactSection = () => {
             <button
               type="submit"
               disabled={uploading}
-              className="mt-6 text-white w-[200px] px-6 py-3 rounded-[50px] bg-gradient-primary bg-gradient-primary-hover transition-all"
+              className="mt-6 w-full max-w-[220px] rounded-full bg-zinc-900 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-zinc-900/25 transition-all hover:bg-fuchsia-700 hover:shadow-fuchsia-600/30 disabled:cursor-not-allowed disabled:opacity-60 sm:w-[200px]"
             >
               {uploading ? "Sending..." : "Send Message"}
             </button>

@@ -70,7 +70,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative mt-auto w-full min-w-0 max-md:max-w-full rounded-tl-3xl rounded-tr-3xl border border-solid border-white border-opacity-10 bg-[#2F2F8A] bg-opacity-10 px-4 py-10 backdrop-blur-md sm:px-8 md:px-10 lg:px-12 lg:py-12 xl:px-16"
+      className="relative mt-auto w-full min-w-0 max-md:max-w-full rounded-tl-3xl rounded-tr-3xl border border-zinc-800 bg-black px-4 py-10 sm:px-8 md:px-10 lg:px-12 lg:py-12 xl:px-16"
     >
       <div className="mx-auto w-full min-w-0 max-w-6xl">
         <div className="grid min-w-0 grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-x-6 lg:gap-y-8 xl:gap-x-8">
@@ -78,7 +78,7 @@ export default function Footer() {
           <div className="min-w-0 text-left lg:col-span-3">
             <Link
               href="/"
-              className="inline-block outline-none ring-offset-2 ring-offset-transparent focus-visible:ring-2 focus-visible:ring-fuchsia-400/60"
+              className="inline-block outline-none ring-offset-2 ring-offset-black focus-visible:ring-2 focus-visible:ring-fuchsia-400/60"
             >
               <Image
                 src="/zoya-logo-new.png"
@@ -192,7 +192,7 @@ export default function Footer() {
         <button
           type="button"
           onClick={scrollToTop}
-          className="fixed bottom-6 right-4 z-[100] flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-[#2F2F8A]/80 text-white shadow-lg shadow-black/30 backdrop-blur-md transition hover:border-fuchsia-400/40 hover:bg-[#2F2F8A] hover:text-fuchsia-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-400/70 sm:right-5 md:bottom-8 md:right-8 md:h-12 md:w-12"
+          className="fixed bottom-6 right-4 z-[100] flex h-11 w-11 items-center justify-center rounded-full border border-zinc-600 bg-zinc-900 text-white shadow-lg shadow-black/50 backdrop-blur-sm transition hover:border-fuchsia-400/50 hover:bg-zinc-800 hover:text-fuchsia-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-400/70 sm:right-5 md:bottom-8 md:right-8 md:h-12 md:w-12"
           aria-label="Back to top"
         >
           <ChevronUp className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.5} />

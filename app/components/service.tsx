@@ -57,62 +57,61 @@ const ServicesSection = ({ services }: ServicesSectionProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: (index % services.length) * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="flex-shrink-0 min-w-[240px] xs:min-w-[260px] sm:min-w-[300px] md:min-w-[360px] lg:min-w-[400px] min-h-[220px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px] bg-gradient-to-br from-[#1C1C65]/80 via-[#2F2F8A]/60 to-[#1C1C65]/80 backdrop-blur-md rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-6 shadow-2xl flex flex-col items-center justify-center transform transition-all duration-300 hover:shadow-fuchsia-500/30 border border-fuchsia-500/20 hover:border-fuchsia-500/50 mx-2 sm:mx-3 md:mx-4 my-2 sm:my-3 relative overflow-hidden group"
+              className="group relative mx-2 my-2 flex min-h-[220px] min-w-[240px] flex-shrink-0 transform flex-col items-center justify-center overflow-hidden rounded-xl border border-gray-200/90 bg-white p-3 shadow-lg shadow-gray-300/50 transition-all duration-300 hover:border-fuchsia-400/55 hover:shadow-xl hover:shadow-fuchsia-500/20 xs:min-w-[260px] sm:mx-3 sm:my-3 sm:min-h-[260px] sm:min-w-[300px] sm:p-4 md:mx-4 md:min-h-[280px] md:min-w-[360px] md:rounded-2xl md:p-5 lg:min-h-[300px] lg:min-w-[400px] lg:p-6"
             >
-              {/* Animated background gradient on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/0 via-purple-600/0 to-blue-600/0 group-hover:from-fuchsia-500/10 group-hover:via-purple-600/10 group-hover:to-blue-600/10 transition-all duration-500 rounded-2xl"></div>
-              
-              {/* Glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-500/20 via-purple-500/20 to-blue-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+              {/* Light wash on hover */}
+              <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-fuchsia-500/0 via-purple-500/0 to-indigo-500/0 transition-all duration-500 group-hover:from-fuchsia-500/[0.07] group-hover:via-purple-500/[0.06] group-hover:to-indigo-500/[0.05] md:rounded-2xl" />
+
+              {/* Soft glow on hover */}
+              <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-r from-fuchsia-400/25 via-purple-400/20 to-indigo-400/25 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 
               {/* Icon/Image Section */}
-              <div className="relative mb-2 sm:mb-3 md:mb-4 flex items-center justify-center">
+              <div className="relative mb-2 flex items-center justify-center sm:mb-3 md:mb-4">
                 {service.image && service.image.asset ? (
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                     className="relative flex items-center justify-center"
                   >
-                    <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+                    <div className="relative flex h-12 w-12 items-center justify-center sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24">
                       <img
                         src={urlFor(service.image.asset).url()}
                         alt={service.image.alt || service.title}
-                        className="w-full h-full object-cover rounded-full relative z-10"
+                        className="relative z-10 h-full w-full rounded-full object-cover ring-2 ring-gray-100 group-hover:ring-fuchsia-200/90"
                       />
                     </div>
                   </motion.div>
                 ) : (
                   <motion.div
-                    className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-gradient-to-br from-fuchsia-500/20 to-purple-600/20 flex items-center justify-center text-xl sm:text-2xl md:text-3xl lg:text-4xl transition-all duration-300"
+                    className="relative flex h-12 w-12 items-center justify-center rounded-full border border-fuchsia-200/80 bg-gradient-to-br from-fuchsia-50 to-purple-50 text-xl shadow-inner transition-all duration-300 sm:h-16 sm:w-16 sm:text-2xl md:h-20 md:w-20 md:text-3xl lg:h-24 lg:w-24 lg:text-4xl"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <div className="flex items-center justify-center w-full h-full relative z-10">
+                    <div className="relative z-10 flex h-full w-full items-center justify-center">
                       {getServiceIcon(service.title)}
                     </div>
                   </motion.div>
                 )}
-                {/* Pulse animation - outside the border, only on hover */}
-                <div className="absolute -inset-2 sm:-inset-3 rounded-full bg-fuchsia-500/10 animate-ping opacity-0 group-hover:opacity-100 pointer-events-none"></div>
+                <div className="pointer-events-none absolute -inset-2 rounded-full bg-fuchsia-400/15 opacity-0 animate-ping group-hover:opacity-100 sm:-inset-3" />
               </div>
 
               {/* Title */}
-              <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold max-w-[220px] sm:max-w-[280px] md:max-w-[320px] text-center text-white mb-1.5 sm:mb-2 md:mb-3 px-2 group-hover:text-fuchsia-300 transition-colors duration-300 relative z-10 leading-tight">
+              <h3 className="relative z-10 mb-1.5 max-w-[220px] px-2 text-center text-sm font-bold leading-tight tracking-tight text-zinc-900 transition-colors duration-300 group-hover:text-fuchsia-700 sm:mb-2 sm:max-w-[280px] sm:text-base md:mb-3 md:max-w-[320px] md:text-lg lg:text-xl">
                 {service.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-300 text-center text-[11px] sm:text-xs md:text-sm lg:text-base max-w-[220px] sm:max-w-[280px] md:max-w-[320px] leading-relaxed px-2 relative z-10 group-hover:text-gray-200 transition-colors duration-300">
+              <p className="relative z-10 max-w-[220px] px-2 text-center text-[11px] leading-relaxed text-zinc-600 transition-colors duration-300 group-hover:text-zinc-800 sm:max-w-[280px] sm:text-xs md:max-w-[320px] md:text-sm lg:text-base">
                 {service.description || service.line1}
               </p>
 
               {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-24 h-24 opacity-0 group-hover:opacity-30 transition-opacity duration-500">
-                <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-fuchsia-500 to-transparent rounded-bl-full"></div>
+              <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                <div className="absolute right-0 top-0 h-full w-full rounded-bl-full bg-gradient-to-br from-fuchsia-400/25 to-transparent" />
               </div>
 
               {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-fuchsia-500/45 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </motion.div>
           ))}
         </Marquee>

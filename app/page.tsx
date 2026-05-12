@@ -209,28 +209,28 @@ export default async function Homepage() {
           </div>
         </section>
 
-        {/* Experience */}
-        <div className="flex flex-col justify-center items-center py-6 md:py-20 xl:py-40 text-fuchsia-500 relative">
-          {/* Background glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent pointer-events-none" />
-          <div className="flex flex-wrap justify-center items-center px-2.5 w-full max-md:max-w-full gap-4">
+        {/* Experience / stats */}
+        <div className="relative flex flex-col items-center justify-center overflow-hidden py-10 md:py-24 xl:py-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(192,38,211,0.18),transparent_55%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/15 to-transparent" />
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[min(90vw,520px)] w-[min(90vw,520px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-600/5 blur-3xl" />
+
+          <div className="relative flex w-full max-w-6xl flex-wrap items-center justify-center gap-5 px-4 sm:gap-6 md:px-6">
             <StatsCard
               number={data?.timelineSection?.experience || "6+"}
               label={data?.timelineSection?.expDescription || "Years Experience"}
               delay={0}
-              className="rounded-tl-md rounded-bl-md"
             />
             <StatsCard
               number={data?.timelineSection?.projectCmp || "50+"}
               label={data?.timelineSection?.proDescription || "Projects Completed"}
               delay={200}
-              className="text-white bg-indigo-900"
+              featured
             />
             <StatsCard
               number={data?.timelineSection?.clients || "30+"}
               label={data?.timelineSection?.clientsDesc || "Happy Clients"}
               delay={400}
-              className="rounded-none rounded-tr-md rounded-br-md"
             />
           </div>
         </div>
