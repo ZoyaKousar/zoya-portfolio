@@ -241,7 +241,7 @@ export default async function Homepage() {
           <div className="flex flex-col max-w-full w-[1320px]">
             <h2 className='text-3xl md:text-5xl font-bold'>{data?.toolsSection?.title || "Tools & Technologies"}</h2>
             <p className="text-xl md:text-3xl font-light mt-5">{data?.toolsSection?.description || "Technologies I work with"}</p>
-            {data?.toolsSection?.imageDsk && (
+            {data?.toolsSection?.imageDsk?.asset?._ref && (
               <img
                 loading="lazy"
                 src={urlFor(data.toolsSection.imageDsk).url()}
@@ -249,7 +249,7 @@ export default async function Homepage() {
                 className="hidden md:block mt-6 md:mt-16 max-w-full"
               />
             )}
-            {data?.toolsSection?.imageMob && (
+            {data?.toolsSection?.imageMob?.asset?._ref && (
               <img
                 loading="lazy"
                 src={urlFor(data.toolsSection.imageMob).url()}
