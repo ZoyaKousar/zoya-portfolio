@@ -76,6 +76,16 @@ export default function RootLayout({
     }
   }, [pathname, currentMetadata.title, currentMetadata.description]); // Effect depends on pathname and metadata to update on route change
 
+  // Home par /#contact se aane par (e.g. portfolio se) contact section tak scroll
+  useEffect(() => {
+    if (pathname !== "/") return;
+    if (typeof window === "undefined" || window.location.hash !== "#contact") return;
+    const id = window.setTimeout(() => {
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => window.clearTimeout(id);
+  }, [pathname]);
+
   return (
     <html lang="en">
       <head>

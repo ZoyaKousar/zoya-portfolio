@@ -62,12 +62,7 @@ body {
   padding-bottom: 0.75rem;
 }
 
-.nav-link-hover:hover {
-  background: linear-gradient(to right, #C961DE, #2954A3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* Nav pill hover styles live in navigation.tsx (solid #c961de) */
 
 .text-primary-hover:hover {
   color: linear-gradient(to right, #2954A3, #C961DE);
@@ -123,7 +118,7 @@ body {
 
 .hero-portrait {
   position: relative;
-  width: min(520px, 100%);
+  width: min(420px, 100%);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;

@@ -55,10 +55,10 @@ const Navigation = () => {
     "nav-link-hover inline-flex cursor-pointer items-center justify-center rounded-full border border-transparent px-5 py-2.5 text-base font-semibold tracking-tight transition-all duration-300 ease-out will-change-transform xl:px-8 xl:text-lg";
 
   const navInactiveHover =
-    "text-white/90 hover:-translate-y-0.5 hover:border-fuchsia-400/65 hover:bg-fuchsia-600/25 hover:text-white hover:shadow-md hover:shadow-fuchsia-900/25";
+    "text-white/90 hover:-translate-y-0.5 hover:border-[#c961de]/80 hover:bg-[#c961de] hover:text-white hover:shadow-md hover:shadow-[#c961de]/35";
 
   const navActiveStyles =
-    "text-gradient-primary border-fuchsia-400/45 bg-white/[0.1] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:border-fuchsia-400/75 hover:bg-fuchsia-600/20";
+    "bg-[#c961de] border-[#c961de] text-white [-webkit-text-fill-color:white] shadow-md shadow-[#c961de]/35 hover:bg-[#b050c8] hover:border-[#b050c8]";
 
   const getNavLinkClass = (link: string) => {
     const isActive =
@@ -68,6 +68,14 @@ const Navigation = () => {
   };
 
   const isPortfolioActive = portfolioItems.some(item => activeLink === item.href);
+
+  const isHome = pathname === "/";
+  const contactNavClass = getNavLinkClass("#contact");
+  const onContactNavigate = () => {
+    setActiveLink("#contact");
+    setIsPortfolioOpen(false);
+    closeSidebar();
+  };
 
   return (
     <>
@@ -81,7 +89,7 @@ const Navigation = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="relative rounded-2xl border border-transparent px-1 py-0.5 transition-colors duration-300 hover:border-fuchsia-400/55 hover:bg-fuchsia-600/20"
+              className="relative rounded-2xl border border-transparent px-1 py-0.5 transition-colors duration-300"
             >
               <motion.img
                 src="/zoya-logo-new.png"
@@ -113,7 +121,7 @@ const Navigation = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="relative rounded-2xl border border-transparent px-2 py-1 transition-colors duration-300 hover:border-fuchsia-400/55 hover:bg-fuchsia-600/20"
+              className="relative rounded-2xl border border-transparent px-2 py-1 transition-colors duration-300"
             >
               <motion.img
                 loading="lazy"
@@ -166,8 +174,8 @@ const Navigation = () => {
                     <div
                       className={`mx-1.5 rounded-xl border border-transparent px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
                         activeLink === item.href
-                          ? "border-fuchsia-400/45 bg-gradient-to-r from-fuchsia-600/25 to-indigo-600/25 text-fuchsia-200 shadow-inner hover:border-fuchsia-400/70 hover:from-fuchsia-600/35 hover:to-indigo-600/35"
-                          : "text-white/85 hover:border-fuchsia-400/50 hover:bg-fuchsia-600/20 hover:text-fuchsia-100"
+                          ? "border-fuchsia-400/45 bg-gradient-to-r from-fuchsia-600/25 to-indigo-600/25 text-fuchsia-200 shadow-inner hover:border-[#c961de]/80 hover:bg-[#c961de] hover:text-white"
+                          : "text-white/85 hover:border-[#c961de]/80 hover:bg-[#c961de] hover:text-white"
                       }`}
                     >
                       {item.name}
@@ -178,25 +186,34 @@ const Navigation = () => {
             )}
           </div>
       
-          <ScrollLink
-            to="contact"
-            spy={true}
-            smooth={true}
-            offset={-50}
-            duration={500}
-            hashSpy={true}
-            onClick={() => setActiveLink("#contact")}
-            className={getNavLinkClass("#contact")}
-          >
-            Contact
-          </ScrollLink>
+          {isHome ? (
+            <ScrollLink
+              to="contact"
+              spy={true}
+              smooth={true}
+              offset={-50}
+              duration={500}
+              hashSpy={true}
+              onClick={() => {
+                setActiveLink("#contact");
+                setIsPortfolioOpen(false);
+              }}
+              className={contactNavClass}
+            >
+              Contact
+            </ScrollLink>
+          ) : (
+            <Link href="/#contact" onClick={onContactNavigate} className={contactNavClass}>
+              Contact
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Icon */}
         <button
           type="button"
           onClick={toggleSidebar}
-          className="rounded-full border border-white/20 bg-white/10 p-2.5 transition-all duration-300 hover:border-fuchsia-400/70 hover:bg-fuchsia-600/30 hover:shadow-md hover:shadow-fuchsia-900/30 lg:hidden"
+          className="rounded-full border border-white/20 bg-white/10 p-2.5 transition-all duration-300 hover:border-[#c961de]/80 hover:bg-[#c961de] hover:shadow-md hover:shadow-[#c961de]/35 lg:hidden"
           aria-expanded={isSidebarOpen}
           aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
         >
@@ -249,8 +266,8 @@ const Navigation = () => {
                   onClick={() => setIsMobilePortfolioOpen(!isMobilePortfolioOpen)}
                   className={`flex w-full items-center justify-between rounded-xl border border-transparent px-3 py-3 transition-all duration-300 ${
                     isPortfolioActive
-                      ? "border-fuchsia-400/45 bg-fuchsia-600/20 text-fuchsia-200 hover:border-fuchsia-400/70 hover:bg-fuchsia-600/30"
-                      : "text-white/90 hover:border-fuchsia-400/55 hover:bg-fuchsia-600/25"
+                      ? "border-fuchsia-400/45 bg-fuchsia-600/20 text-fuchsia-200 hover:border-[#c961de]/80 hover:bg-[#c961de] hover:text-white"
+                      : "text-white/90 hover:border-[#c961de]/80 hover:bg-[#c961de] hover:text-white"
                   }`}
                 >
                   <span className="font-semibold">Portfolio</span>
@@ -272,8 +289,8 @@ const Navigation = () => {
                           href={item.href}
                           className={`block rounded-lg border border-transparent py-2.5 pl-2 text-sm font-medium transition-all duration-200 ${
                             activeLink === item.href
-                              ? "border-fuchsia-400/45 bg-fuchsia-600/20 text-fuchsia-100 hover:border-fuchsia-400/65 hover:bg-fuchsia-600/30"
-                              : "text-white/75 hover:border-fuchsia-400/45 hover:bg-fuchsia-600/20 hover:text-fuchsia-100"
+                              ? "border-fuchsia-400/45 bg-fuchsia-600/20 text-fuchsia-100 hover:border-[#c961de]/80 hover:bg-[#c961de] hover:text-white"
+                              : "text-white/75 hover:border-[#c961de]/80 hover:bg-[#c961de] hover:text-white"
                           }`}
                         >
                           {item.name}
@@ -285,17 +302,28 @@ const Navigation = () => {
               </li>
              
               <li onClick={closeSidebar} className="rounded-xl px-1">
-                <ScrollLink
-                  to="contact"
-                  spy={true}
-                  smooth={true}
-                  offset={-50}
-                  duration={500}
-                  hashSpy={true}
-                  className={`${getNavLinkClass("#contact")} flex w-full cursor-pointer justify-start`}
-                >
-                  Contact
-                </ScrollLink>
+                {isHome ? (
+                  <ScrollLink
+                    to="contact"
+                    spy={true}
+                    smooth={true}
+                    offset={-50}
+                    duration={500}
+                    hashSpy={true}
+                    onClick={() => setActiveLink("#contact")}
+                    className={`${contactNavClass} flex w-full cursor-pointer justify-start`}
+                  >
+                    Contact
+                  </ScrollLink>
+                ) : (
+                  <Link
+                    href="/#contact"
+                    onClick={onContactNavigate}
+                    className={`${contactNavClass} flex w-full cursor-pointer justify-start`}
+                  >
+                    Contact
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
