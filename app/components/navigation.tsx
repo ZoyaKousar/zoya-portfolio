@@ -52,7 +52,7 @@ const Navigation = () => {
   };
 
   const navPillBase =
-    "nav-link-hover inline-flex cursor-pointer items-center justify-center rounded-full border border-transparent px-5 py-2.5 text-base font-semibold tracking-tight transition-all duration-300 ease-out will-change-transform xl:px-8 xl:text-lg";
+    "nav-link-hover inline-flex cursor-pointer items-center justify-center rounded-full border border-transparent px-4 py-1.5 text-sm font-semibold tracking-tight transition-all duration-300 ease-out will-change-transform xl:px-6 xl:text-sm";
 
   const navInactiveHover =
     "text-white/90 hover:-translate-y-0.5 hover:border-[#c961de]/80 hover:bg-[#c961de] hover:text-white hover:shadow-md hover:shadow-[#c961de]/35";
@@ -81,7 +81,7 @@ const Navigation = () => {
     <>
       <div className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#0a0c2e]/82 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-fuchsia-500/35 to-transparent" aria-hidden />
-        <div className="relative mx-auto flex max-w-[90rem] items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:justify-center">
+        <div className="relative mx-auto flex max-w-[90rem] items-center justify-between px-4 py-2 sm:px-6 sm:py-2.5 lg:justify-center">
         {/* Mobile Logo */}
         <div className="lg:hidden flex items-center">
           <Link href="/">
@@ -94,7 +94,7 @@ const Navigation = () => {
               <motion.img
                 src="/zoya-logo-new.png"
                 alt="Logo"
-                className="h-20 sm:h-24 md:h-28"
+                className="h-20 sm:h-20 md:h-20"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -126,7 +126,7 @@ const Navigation = () => {
               <motion.img
                 loading="lazy"
                 src="/zoya-logo-new.png"
-                className="h-20 cursor-pointer object-contain sm:h-24 md:h-28"
+                className="h-20 cursor-pointer object-contain sm:h-20 md:h-20"
                 alt="Logo"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}

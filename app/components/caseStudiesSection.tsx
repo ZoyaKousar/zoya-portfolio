@@ -122,7 +122,7 @@ export default function CaseStudiesSection({ caseStudies }: CaseStudiesSectionPr
             <button
               type="button"
               onClick={() => scroll("left")}
-              className="absolute left-0 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-r from-fuchsia-500/90 to-purple-600/90 p-2 text-white shadow-lg transition-all duration-300 hover:from-fuchsia-600 hover:to-purple-700 hover:shadow-fuchsia-500/50 md:left-2 md:flex md:p-3"
+              className="absolute left-0 top-1/2 z-[100] hidden -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-r from-fuchsia-500/90 to-purple-600/90 p-2 text-white shadow-lg transition-all duration-300 hover:from-fuchsia-600 hover:to-purple-700 hover:shadow-fuchsia-500/50 md:left-2 md:flex md:p-3"
               aria-label="Scroll left"
             >
               <svg className="h-5 w-5 md:h-6 md:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,7 +135,7 @@ export default function CaseStudiesSection({ caseStudies }: CaseStudiesSectionPr
             <button
               type="button"
               onClick={() => scroll("right")}
-              className="absolute right-0 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-r from-fuchsia-500/90 to-purple-600/90 p-2 text-white shadow-lg transition-all duration-300 hover:from-fuchsia-600 hover:to-purple-700 hover:shadow-fuchsia-500/50 md:right-2 md:flex md:p-3"
+              className="absolute right-0 top-1/2 z-[100] hidden -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-r from-fuchsia-500/90 to-purple-600/90 p-2 text-white shadow-lg transition-all duration-300 hover:from-fuchsia-600 hover:to-purple-700 hover:shadow-fuchsia-500/50 md:right-2 md:flex md:p-3"
               aria-label="Scroll right"
             >
               <svg className="h-5 w-5 md:h-6 md:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
