@@ -41,7 +41,7 @@ export default function Section1_Hero() {
             {/* CTA Buttons - New stacked or side-by-side with better spacing */}
             <div className="flex flex-col sm:flex-row gap-4 mb-10 md:mb-12 animate-fadeInUp animation-delay-300">
               <button
-                onClick={() => window.open('https://calendly.com/adnanghaffar/30min', '_blank')}
+                onClick={() => window.open('https://calendly.com/zoyakou', '_blank')}
                 className="group flex items-center justify-center gap-3 text-sm md:text-base py-3.5 px-8 rounded-xl bg-gradient-to-r from-[#d8b4fe] to-[#c084fc] hover:from-[#c084fc] hover:to-[#a855f7] text-[#3b0764] font-bold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5"
               >
                 <span>Book My Free Strategy Call</span>

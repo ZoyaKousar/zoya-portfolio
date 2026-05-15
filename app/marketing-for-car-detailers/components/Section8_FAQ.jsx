@@ -231,7 +231,7 @@ export default function Section8_FAQ() {
                         </p>
                         
                         <a
-                            href="https://calendly.com/adnanghaffar/30min"
+                            href="https://calendly.com/zoyakou"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 bg-[#d8b4fe] text-[#3b0764] font-bold py-3 px-6 rounded-xl hover:shadow-xl transition-all duration-300 group"

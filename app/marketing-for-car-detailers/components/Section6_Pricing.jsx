@@ -196,7 +196,7 @@ export default function Section6_Pricing() {
 
                                 {/* CTA Button */}
                                 <a
-                                    href="https://calendly.com/adnanghaffar/30min"
+                                    href="https://calendly.com/zoyakou"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 text-center block ${plan.featured
@@ -322,7 +322,7 @@ export default function Section6_Pricing() {
                         <div className="relative inline-block group">
                             <div className="absolute -inset-1 bg-gradient-to-r from-[#d8b4fe] to-[#c084fc] rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500"></div>
                             <a
-                                href="https://calendly.com/adnanghaffar/30min"
+                                href="https://calendly.com/zoyakou"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="relative inline-flex items-center gap-3 bg-gradient-to-r from-[#d8b4fe] to-[#c084fc] text-[#3b0764] font-bold py-3.5 px-8 rounded-full hover:shadow-2xl transition-all duration-300 group-hover:scale-105"

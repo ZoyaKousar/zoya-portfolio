@@ -122,7 +122,7 @@ export default function Section4_HowItWorks() {
           <div className="relative inline-block group">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#d8b4fe] to-[#c084fc] rounded-xl blur opacity-0 group-hover:opacity-50 transition duration-300"></div>
             <a 
-              href="https://calendly.com/adnanghaffar/30min"
+              href="https://calendly.com/zoyakou"
               target="_blank"
               rel="noopener noreferrer"
               className="relative flex items-center gap-3 bg-gradient-to-r from-[#d8b4fe] to-[#c084fc] text-[#3b0764] font-bold py-3.5 px-8 rounded-xl hover:shadow-xl transition-all duration-300 inline-block group-hover:scale-105"
