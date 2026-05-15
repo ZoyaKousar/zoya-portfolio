@@ -7,7 +7,6 @@ import Image from "next/image";
 import { client } from "../sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import TypingAnimation from './components/typingAnimation';
-import StatsCard from './components/statsCard';
 import RecentWorkSection from './components/recentWorkSection';
 import CaseStudiesSection from './components/caseStudiesSection';
 
@@ -93,6 +92,7 @@ const defaultServices = [
 const caseStudies = [
   {
     title: "E-commerce Growth via Funnel + Ads [Shopify Case]",
+    href: "/shopify-case-studies",
     challenge: "Traffic was coming but carts abandoned like crazy and sales were almost nothing.",
     solution:
       "Threw together a solid GHL funnel tied right into Shopify + hit them with Meta retargeting.",
@@ -104,6 +104,7 @@ const caseStudies = [
   },
   {
     title: "CRM-Driven Lead Nurturing for IT Services [Web Dev & CRM Case]",
+    href: "/web-dev",
     challenge: "Leads everywhere but follow-up was a total mess, spreadsheets, missed calls, forgotten emails.",
     solution:
       "Got HubSpot running + real automated email and SMS flows that don't sound like a machine wrote them.",
@@ -114,6 +115,7 @@ const caseStudies = [
   },
   {
     title: "Multi-Channel Strategy for Brand Awareness [Digital Marketing Case]",
+    href: "/digital-marketing",
     challenge: "Nobody could find them on Google or social, basically invisible.",
     solution:
       "Wrote content that actually ranks, ran ads on Meta + Google, tweaked everything based on what numbers were saying.",
@@ -124,6 +126,7 @@ const caseStudies = [
   },
   {
     title: "App + Web Launch with HubSpot Integration [Web & Mobile Case]",
+    href: "/portfolio",
     challenge: "Site was trash on mobile and we had no idea what people were doing once they landed.",
     solution:
       "Built a decent responsive site + simple app, hooked it all to HubSpot for real-time tracking and emails that make sense.",
@@ -134,6 +137,7 @@ const caseStudies = [
   },
   {
     title: "B2B Website & Sales Funnel Overhaul [Company Case]",
+    href: "/wordpress",
     challenge: "Old-looking site, leads costing way too much, and barely any coming in.",
     solution:
       "Gave them a fresh WordPress build, strong GHL funnel behind the scenes, smarter ad budget.",
@@ -151,55 +155,108 @@ export default async function Homepage() {
     <div className="flex flex-col px-4">
       <div className="flex flex-col w-full max-md:max-w-full">
         {/* HERO SECTION */}
-        <section className="mt-32 md:mt-20 py-6 md:py-16  flex flex-col md:flex-row items-center justify-center gap-6 md:min-h-[609px] lg:min-h-[670px] xl:min-h-[730px] max-w-7xl mx-auto">
-          <div className="md:w-1/2 w-full justify-center md:justify-end items-center self-center">
-            <div className="hero-copy-fade">
-              <p className="text-white/80 tracking-wide text-base md:text-base mb-3">
-                Hello, I&apos;m
-              </p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl text-white font-extrabold leading-[1.05]">
-                <span className="text-gradient-primary">{heroName}</span>
-              </h1>
-              <div className="mt-5 text-2xl sm:text-3xl md:text-4xl text-white font-bold leading-tight">
-                <TypingAnimation
-                  text={[
-                    "Smart Growth: <span class='hero-chip'>Full-Stack + CRM</span>",
-                    "Results with <span class='hero-chip'>WordPress, Shopify & Ads</span>",
-                    "Leads & Sales through <span class='hero-chip'>SEO Automation</span>"
-                  ]}
-                  speed={50}
-                  deleteSpeed={30}
-                  pauseTime={1500}
-                />
-              </div>
-            </div>
-            <p className="text-base md:text-lg mb-10 text-white" style={{ opacity: 0.8 }}>
-              {data?.description || "Expert in QA Automation, Technical Writing, Web Development"}
+        <section className="relative mt-24 md:mt-16 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0 min-h-[calc(100vh-96px)] max-w-7xl mx-auto w-full px-2 md:px-6">
+
+          {/* LEFT — copy */}
+          <div className="hero-copy-fade flex flex-col w-full md:w-1/2 justify-center z-10">
+
+            {/* Badge */}
+            <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-fuchsia-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
+              Available for work
+            </span>
+
+            {/* Greeting */}
+            <p className="text-white/60 tracking-widest text-sm font-medium mb-2 uppercase">
+              Hello, I&apos;m
             </p>
-            <div className="flex flex-col md:flex-row gap-4">
-              {data?.button1?.link && (
+
+            {/* Name */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black leading-[1.0] tracking-tight mb-4">
+              <span className="text-gradient-primary">{heroName}</span>
+            </h1>
+
+            {/* Typing tagline */}
+            <div className="text-xl sm:text-2xl md:text-3xl text-white font-semibold leading-snug mb-5 min-h-[2.5rem]">
+              <TypingAnimation
+                text={[
+                  "Smart Growth: <span class='hero-chip'>Full-Stack + CRM</span>",
+                  "Results with <span class='hero-chip'>WordPress, Shopify & Ads</span>",
+                  "Leads & Sales through <span class='hero-chip'>SEO Automation</span>"
+                ]}
+                speed={50}
+                deleteSpeed={30}
+                pauseTime={1500}
+              />
+            </div>
+
+            {/* Description */}
+            <p className="text-base md:text-lg text-white/65 leading-relaxed mb-8 max-w-md">
+              {data?.description || "Helping businesses scale with smart tools like GoHighLevel, HubSpot, Meta Ads & more."}
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4 mb-10">
+              {data?.button1?.link ? (
                 <Link
                   href={data.button1.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-700 text-center w-[200px] text-white px-6 py-3 rounded-[50px] hover:bg-fuchsia-500">
-                  {data.button1?.text || "Contact Me"}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:shadow-lg">
+                  {data.button1?.text || "Hire me"}
+                </Link>
+              ) : (
+                <Link
+                  href="/#contact"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:shadow-lg">
+                  Hire me
                 </Link>
               )}
-              <a href="/cv/general.pdf" download>
-                <div className="text-white text-center w-[200px] px-6 py-3 rounded-[50px] bg-gradient-primary bg-gradient-primary-hover transition-all">
-                  {data?.button2?.text || "Download CV"}
-                </div>
+              <a href="/cv/general.pdf" download
+                className="inline-flex items-center gap-2 rounded-full bg-[#c961de] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#c961de]/30 transition-all duration-300 hover:bg-[#b050c8] hover:shadow-[#c961de]/50">
+                {data?.button2?.text || "Download CV"}
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
               </a>
+            </div>
 
+            {/* Stats */}
+            <div className="flex items-stretch gap-0 divide-x divide-white/10">
+              <div className="flex flex-col pr-7">
+                <span className="text-3xl font-black leading-none text-white md:text-4xl">
+                  {data?.timelineSection?.experience || "6+"}
+                </span>
+                <span className="mt-1.5 text-xs font-medium text-white/50 md:text-sm">
+                  {data?.timelineSection?.expDescription || "Years Experience"}
+                </span>
+              </div>
+              <div className="flex flex-col px-7">
+                <span className="text-3xl font-black leading-none text-[#c961de] md:text-4xl">
+                  {data?.timelineSection?.projectCmp || "50+"}
+                </span>
+                <span className="mt-1.5 text-xs font-medium text-white/50 md:text-sm">
+                  {data?.timelineSection?.proDescription || "Projects Completed"}
+                </span>
+              </div>
+              <div className="flex flex-col pl-7">
+                <span className="text-3xl font-black leading-none text-white md:text-4xl">
+                  {data?.timelineSection?.clients || "30+"}
+                </span>
+                <span className="mt-1.5 text-xs font-medium text-white/50 md:text-sm">
+                  {data?.timelineSection?.clientsDesc || "Happy Clients"}
+                </span>
+              </div>
             </div>
           </div>
-        <div className="md:w-1/2 w-full flex justify-center md:justify-end items-center self-center">
-       <div className="hero-portrait">
+
+          {/* RIGHT — portrait */}
+          <div className="w-full md:w-1/2 flex justify-center md:justify-end items-center">
+            <div className="hero-portrait">
               <div className="hero-portrait-glow" aria-hidden="true" />
               <Image
-                src="/213.jpeg"
-                alt="Hero portrait"               
+                src="/zoyakk.jpeg"
+                alt="Zoya Kousar"
                 width={320}
                 height={520}
                 priority
@@ -207,33 +264,9 @@ export default async function Homepage() {
               />
             </div>
           </div>
+
         </section>
 
-        {/* Experience / stats */}
-        <div className="relative flex flex-col items-center justify-center overflow-hidden py-10 md:py-24 xl:py-36">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(192,38,211,0.18),transparent_55%)]" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/15 to-transparent" />
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[min(90vw,520px)] w-[min(90vw,520px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-600/5 blur-3xl" />
-
-          <div className="relative flex w-full max-w-6xl flex-wrap items-center justify-center gap-5 px-4 sm:gap-6 md:px-6">
-            <StatsCard
-              number={data?.timelineSection?.experience || "6+"}
-              label={data?.timelineSection?.expDescription || "Years Experience"}
-              delay={0}
-            />
-            <StatsCard
-              number={data?.timelineSection?.projectCmp || "50+"}
-              label={data?.timelineSection?.proDescription || "Projects Completed"}
-              delay={200}
-              featured
-            />
-            <StatsCard
-              number={data?.timelineSection?.clients || "30+"}
-              label={data?.timelineSection?.clientsDesc || "Happy Clients"}
-              delay={400}
-            />
-          </div>
-        </div>
         {/* Recent Work */}
         <RecentWorkSection />
 
