@@ -1,661 +1,367 @@
 "use client"
-import { useState } from "react"
+
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Bug,
+  Code2,
+  FileText,
+  ShoppingBag,
+  Sparkles,
+  Wrench,
+  Zap,
+} from "lucide-react"
 import YouTubeVideo from "../components/youtubeVideo"
 import { PORTFOLIO_VIDEOS } from "../config/portfolioVideos"
 
-// Work Experience Data
-const workExperience = [
-  {
-    company: "SpeechLab.ai",
-    website: "https://www.speechlab.ai/",
-    description:
-      "AI-powered speech technology platform providing advanced voice synthesis and speech recognition solutions.",
-    role: "Virtual Assistant & QA Engineer",
-    period: "2023 - Present",
-    icon: "🎤",
-  },
-  {
-    company: "Tax & Accounting Hub LLC",
-    website: "https://taxaccountinghub.com/",
-    description: "Professional tax and accounting services firm offering comprehensive financial solutions.",
-    role: "Technical Support & Web Development",
-    period: "2022 - 2023",
-    icon: "📊",
-  },
-  {
-    company: "USA Toyz",
-    website: "https://usatoyz.com/",
-    description: "E-commerce store specializing in innovative toys and educational products for kids.",
-    role: "Shopify Developer & E-commerce Manager",
-    period: "2022 - 2023",
-    icon: "🛍️",
-  },
-  {
-    company: "GetDandy",
-    website: "https://getdandy.com/",
-    description: "AI-powered reputation management platform helping businesses manage online reviews.",
-    role: "QA Engineer & Technical Writer",
-    period: "2021 - 2022",
-    icon: "⭐",
-  },
-  {
-    company: "CodeAutomation.ai",
-    website: "https://codeautomation.ai",
-    description: "Automation solutions platform helping businesses streamline their development workflows.",
-    role: "QA Automation Engineer",
-    period: "2021 - 2022",
-    icon: "⚙️",
-  },
-]
+// ─── animation presets ───────────────────────────────────────────────────────
+const vp = { once: true, amount: 0.15, margin: "0px 0px -60px 0px" } as const
 
-// Shopify Projects
-const shopifyProjects = [
-  {
-    id: "usatoyz",
-    title: "USA TOYZ",
-    image: "/colorful-ecommerce-store-kids-toys.jpg",
-    website: "https://usatoyz.com/",
-    description:
-      "Did work on USAToyz Shopify store, changed some layouts, made it actually good on phones, connected a few apps so the store doesn't feel clunky and customers like using it more.",
-  },
-  {
-    id: "poweryourfun",
-    title: "POWER YOUR FUN",
-    image: "/modern-ecommerce-platform-toys-gaming.jpg",
-    website: "https://poweryourfun.com/",
-    description:
-      "Fixed up PowerYourFun Shopify store, made mobile faster and easier, hooked up apps, helped make daily management and growing it less painful.",
-  },
-]
-
-// Skills Data
-const skills = [
-  { name: "QA ENGINEER", percentage: 95 },
-  { name: "SHOPIFY DEVELOPER", percentage: 95 },
-  { name: "TECHNICAL WRITING", percentage: 90 },
-  { name: "WEB DEVELOPMENT", percentage: 95 },
-]
-
-// Development Projects
-const developmentProjects = [
-  {
-    id: "geniusscribe",
-    title: "GENIUS SCRIBE LTD",
-    image: "/professional-writing-services-website-blog.jpg",
-    website: "https://geniusscribe.com/",
-    description:
-      "Helped with the Genius Scribe website, got the content organized, made their writing and editing services look proper and easy to read.",
-  },
-  {
-    id: "mrlocks",
-    title: "MR. LOCKS",
-    image: "/locksmith-security-services-professional-website.jpg",
-    website: "https://mrlocks.com/",
-    description:
-      "Worked on Mr. Locks site, sorted layout and content so it looks like a real professional locksmith/security business.",
-  },
-]
-
-// QA Projects
-const qaProjects = [
-  {
-    id: "webapptesting",
-    title: "WEB APP TESTING",
-    image: "/web-application-testing-quality-assurance-dashboar.jpg",
-    description:
-      "Tested a web app manually, found annoying usability things, checked mobile, tested outside integrations so it doesn't suck for users.",
-  },
-  {
-    id: "mobileapptesting",
-    title: "MOBILE APP TESTING",
-    image: "/mobile-app-testing-quality-assurance-ux.jpg",
-    description:
-      "Did manual testing on a mobile app, looked at how it feels, different phones, integrations, made sure people won't hate it.",
-  },
-]
-
-// Tech-Writer Projects
-const techWriterProjects = [
-  {
-    id: "qalified",
-    title: "QALIFIED BUILDING QUALITY",
-    image: "/software-testing-qa-blog-technical-writing.jpg",
-    website: "https://qalified.com/blog/",
-    description:
-      "Wrote some QA and testing content, took complicated testing stuff and made it simple and actually useful.",
-  },
-  {
-    id: "force1rc",
-    title: "FORCE1 RC",
-    image: "/drone-technology-rc-news-blog-website.jpg",
-    website: "https://force1rc.com/blogs/news",
-    description:
-      "Wrote drone articles, tips, what's new, product breakdowns so people get their drones and actually enjoy them.",
-  },
-]
-
-// Project type definition
-type Project = {
-  id: string
-  title: string
-  image?: string
-  website?: string
-  description: string
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  show: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+}
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } },
+}
+const item = {
+  hidden: { opacity: 0, y: 20, scale: 0.97 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring" as const, stiffness: 340, damping: 26 } },
 }
 
-const ProjectModal = ({
-  project,
-  isOpen,
-  onClose,
-}: {
-  project: Project | null
-  isOpen: boolean
-  onClose: () => void
-}) => {
-  if (!isOpen || !project) return null
+// ─── data ─────────────────────────────────────────────────────────────────────
+const stats = [
+  { number: "5+",   label: "Years Experience" },
+  { number: "50+",  label: "Projects Delivered" },
+  { number: "100%", label: "Client Satisfaction" },
+]
 
+const highlights = [
+  "Manual & Automation QA Testing",
+  "Shopify Builds & Customisation",
+  "Web Development & CMS Updates",
+  "Technical Writing & SEO Content",
+  "CRM & Workflow Automation",
+]
+
+const experience = [
+  { company: "SpeechLab.ai",          url: "https://www.speechlab.ai/",        role: "Virtual Assistant & QA Engineer",          period: "2023 – Present", icon: "🎤", accent: "border-fuchsia-500/30 hover:border-fuchsia-400/60 hover:shadow-fuchsia-500/10" },
+  { company: "Tax & Accounting Hub",   url: "https://taxaccountinghub.com/",    role: "Technical Support & Web Development",      period: "2022 – 2023",    icon: "📊", accent: "border-sky-500/30     hover:border-sky-400/60     hover:shadow-sky-500/10" },
+  { company: "USA Toyz",               url: "https://usatoyz.com/",             role: "Shopify Developer & E-commerce Manager",   period: "2022 – 2023",    icon: "🛍️", accent: "border-amber-400/30   hover:border-amber-300/60   hover:shadow-amber-500/10" },
+  { company: "GetDandy",               url: "https://getdandy.com/",            role: "QA Engineer & Technical Writer",           period: "2021 – 2022",    icon: "⭐", accent: "border-emerald-400/30 hover:border-emerald-300/60 hover:shadow-emerald-500/10" },
+  { company: "CodeAutomation.ai",      url: "https://codeautomation.ai",        role: "QA Automation Engineer",                   period: "2021 – 2022",    icon: "⚙️", accent: "border-rose-500/30    hover:border-rose-400/60    hover:shadow-rose-500/10" },
+]
+
+type Project = {
+  title: string; description: string; image: string; url?: string; tag: string
+}
+const projects: Project[] = [
+  { title: "USA Toyz",        tag: "Shopify",      image: "/colorful-ecommerce-store-kids-toys.jpg",              url: "https://usatoyz.com/",            description: "Revamped layout, improved mobile UX, and integrated apps to boost conversions." },
+  { title: "Power Your Fun",  tag: "Shopify",      image: "/modern-ecommerce-platform-toys-gaming.jpg",           url: "https://poweryourfun.com/",       description: "Optimised mobile performance, connected third-party apps, streamlined daily ops." },
+  { title: "Genius Scribe",   tag: "Web Dev",      image: "/professional-writing-services-website-blog.jpg",      url: "https://geniusscribe.com/",       description: "Structured content and redesigned service pages for clarity and conversions." },
+  { title: "Mr. Locks",       tag: "Web Dev",      image: "/locksmith-security-services-professional-website.jpg",url: "https://mrlocks.com/",            description: "Rebuilt layout and copy for a professional locksmith brand — clean and trustworthy." },
+  { title: "Web App QA",      tag: "QA Testing",   image: "/web-application-testing-quality-assurance-dashboar.jpg",                                      description: "End-to-end manual testing covering usability, integrations, and cross-browser flows." },
+  { title: "Mobile App QA",   tag: "QA Testing",   image: "/mobile-app-testing-quality-assurance-ux.jpg",                                                  description: "Device & OS testing, UX flows, and third-party checks for a polished mobile release." },
+  { title: "Qalified Blog",   tag: "Tech Writing", image: "/software-testing-qa-blog-technical-writing.jpg",      url: "https://qalified.com/blog/",      description: "Translated complex QA topics into clear, actionable content for dev audiences." },
+  { title: "Force1 RC",       tag: "Tech Writing", image: "/drone-technology-rc-news-blog-website.jpg",           url: "https://force1rc.com/blogs/news", description: "Drone guides, product breakdowns, and how-tos that drive engagement and sales." },
+]
+
+const tagStyle: Record<string, string> = {
+  "Shopify":      "text-amber-400   bg-amber-400/10   border-amber-400/30",
+  "Web Dev":      "text-sky-400     bg-sky-400/10     border-sky-400/30",
+  "QA Testing":   "text-emerald-400 bg-emerald-400/10 border-emerald-400/30",
+  "Tech Writing": "text-violet-400  bg-violet-400/10  border-violet-400/30",
+}
+const tagIcon: Record<string, React.ElementType> = {
+  "Shopify": ShoppingBag, "Web Dev": Code2, "QA Testing": Bug, "Tech Writing": FileText,
+}
+
+const skills = [
+  { label: "QA Engineering",      Icon: Bug,         desc: "Manual & automation testing — web, mobile, APIs.", ring: "from-emerald-500 to-teal-600", card: "border-emerald-400/30 shadow-emerald-500/10" },
+  { label: "Shopify Development", Icon: ShoppingBag, desc: "Theme builds, custom sections, app integrations.",  ring: "from-amber-400 to-orange-600", card: "border-amber-400/30   shadow-amber-400/10" },
+  { label: "Web Development",     Icon: Code2,       desc: "Front-end fixes, CMS updates, landing pages.",      ring: "from-sky-400 to-blue-600",     card: "border-sky-400/30     shadow-sky-400/10" },
+  { label: "Technical Writing",   Icon: FileText,    desc: "SEO blogs, documentation, product copy.",           ring: "from-violet-500 to-fuchsia-600",card: "border-violet-400/30  shadow-violet-500/10" },
+  { label: "CRM & Automation",    Icon: Zap,         desc: "GHL, Zapier, and workflow automation setup.",       ring: "from-fuchsia-500 to-indigo-600",card: "border-fuchsia-400/30 shadow-fuchsia-500/10" },
+  { label: "Admin Support",       Icon: Wrench,      desc: "Research, coordination, project management.",       ring: "from-rose-500 to-pink-600",    card: "border-rose-400/30    shadow-rose-500/10" },
+]
+
+// ─── reusable components ──────────────────────────────────────────────────────
+function SectionHeader({ eyebrow, title, highlight, description }: {
+  eyebrow?: string; title: string; highlight?: string; description: string
+}) {
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-        onClick={onClose}
-      >
-        <motion.div
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-[#0F103F] rounded-2xl max-w-2xl w-full p-8 relative border border-fuchsia-500/20"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-indigo-900 hover:bg-indigo-800 flex items-center justify-center transition-colors"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          </button>
-
-          {project.image && (
-            <img
-              src={project.image || "/placeholder.svg"}
-              alt={project.title}
-              className="w-full h-64 object-cover rounded-lg mb-6"
-            />
-          )}
-
-          <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>
-          <p className="text-white/80 mb-6 leading-relaxed">{project.description}</p>
-
-          {project.website && (
-            <Link
-              href={project.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-fuchsia-500 to-indigo-600 text-white px-6 py-3 rounded-lg hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all"
-            >
-              Visit Website
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
-              </svg>
-            </Link>
-          )}
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={vp} className="mb-12 text-center md:mb-16">
+      {eyebrow && (
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-fuchsia-300">
+          <Sparkles className="h-3.5 w-3.5" aria-hidden />{eyebrow}
+        </span>
+      )}
+      <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+        {title}{" "}
+        {highlight && <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent">{highlight}</span>}
+      </h2>
+      <p className="mx-auto max-w-2xl text-sm leading-relaxed text-white/55 sm:text-base md:text-lg">{description}</p>
+    </motion.div>
   )
 }
 
-const SkillBar = ({ skill, index }: { skill: (typeof skills)[0]; index: number }) => (
-  <motion.div
-    initial={{ opacity: 0, x: 50 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ delay: index * 0.1 }}
-    className="flex items-center gap-4 mb-6"
-  >
-    <div className="relative flex-shrink-0">
-      <svg width="80" height="80" viewBox="0 0 80 80">
-        <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(192, 38, 211, 0.2)" strokeWidth="6" />
-        <motion.circle
-          cx="40"
-          cy="40"
-          r="35"
-          fill="none"
-          stroke="url(#skillGradient)"
-          strokeWidth="6"
-          strokeLinecap="round"
-          strokeDasharray={`${skill.percentage * 2.2} 220`}
-          transform="rotate(-90 40 40)"
-          initial={{ strokeDasharray: "0 220" }}
-          whileInView={{ strokeDasharray: `${skill.percentage * 2.2} 220` }}
-          transition={{ duration: 1, delay: index * 0.2 }}
-        />
-        <defs>
-          <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#C961DE" />
-            <stop offset="100%" stopColor="#2954A3" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-fuchsia-400">
-        {skill.percentage}%
-      </span>
-    </div>
-    <div className="flex-1 bg-indigo-900/50 border border-blue-800 text-white py-4 px-6 rounded-lg">
-      <span className="font-semibold tracking-wide text-sm">{skill.name}</span>
-    </div>
-  </motion.div>
-)
-
-export default function VAWorkPage() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-
+function ProjectCard({ p, i }: { p: Project; i: number }) {
+  const TagIcon = tagIcon[p.tag]
   return (
-    <div className="min-h-screen text-white overflow-hidden">
-      {/* Video Hero Section */}
-      <section className="relative py-8 md:py-12 px-4 md:px-8 lg:px-16 mt-20 min-h-[85vh] flex items-center">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
+    <motion.div custom={i} variants={item}
+      whileHover={{ y: -7, transition: { type: "spring", stiffness: 380, damping: 22 } }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] shadow-xl shadow-black/25 transition hover:border-fuchsia-400/35 hover:shadow-fuchsia-900/20"
+    >
+      <div className="relative h-48 overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07081e]/85 via-[#07081e]/10 to-transparent" />
+        <span className={`absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold backdrop-blur-sm ${tagStyle[p.tag]}`}>
+          <TagIcon className="h-3 w-3" aria-hidden />{p.tag}
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="mb-2 text-base font-bold text-white group-hover:text-fuchsia-300 transition-colors sm:text-lg">{p.title}</h3>
+        <p className="flex-1 text-sm leading-relaxed text-white/55">{p.description}</p>
+        {p.url && (
+          <Link href={p.url} target="_blank" rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-fuchsia-400 transition hover:text-fuchsia-300">
+            Visit site <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+          </Link>
+        )}
+      </div>
+      <div className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-fuchsia-500/8 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+    </motion.div>
+  )
+}
+
+// ─── page ─────────────────────────────────────────────────────────────────────
+export default function VAWorkPage() {
+  return (
+    <div className="mt-20 min-h-screen overflow-x-hidden text-white">
+
+      {/* ═══════════════════════════════ HERO ═══════════════════════════════ */}
+      <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-4 py-28 md:px-8 lg:px-16">
+
+        {/* deep background glows */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/4 top-0 h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-fuchsia-600/15 blur-[120px]" />
+          <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-indigo-600/15 blur-[100px]" />
+          {/* horizontal shimmer line */}
+          <div className="absolute left-1/2 top-1/2 h-px w-full max-w-4xl -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-fuchsia-500/20 to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10 w-full">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Text Content */}
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }} 
-              animate={{ opacity: 1, x: 0 }} 
-              className="text-center lg:text-left"
-            >
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-                Hello, I&apos;m a Virtual Assistant who actually understands tech.
-              </h1>
-              <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto lg:mx-0 mb-3">
-                I keep websites, apps, and stores from breaking, fixing Shopify stuff, doing real QA testing, helping on web projects, writing content, whatever needs doing.
-              </p>
-              <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto lg:mx-0 mb-4">
-                Need someone who actually pays attention and catches problems early? That&apos;s me
-              </p>
-              <div className="mt-6 flex justify-center lg:justify-start">
-                <a href="/cv/va.pdf" download>
-                  <div className="w-[200px] rounded-[50px] bg-gradient-primary px-6 py-3 text-center text-white transition-all bg-gradient-primary-hover">
-                    Download CV
-                  </div>
-                </a>
-              </div>
-              <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto lg:mx-0 mt-6">
-                Watch my introduction video to learn more about my expertise and how I can help your business grow.
-              </p>
-            </motion.div>
+        <div className="relative z-10 mx-auto w-full max-w-5xl text-center">
 
-            {/* YouTube Video Embed */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="w-full"
-            >
-              <YouTubeVideo 
-                videoId={PORTFOLIO_VIDEOS.vaWork}
-                title="Virtual Assistant Introduction"
-              />
-              <p className="text-center text-white/50 text-sm mt-3">
-                Click play to watch my introduction
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Work Experience Section */}
-      <section className="relative py-24 px-4 md:px-8 lg:px-16">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-fuchsia-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              My Work{" "}
-              <span className="text-fuchsia-500">
-                Experience
-              </span>
-            </h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Showcasing expertise in QA Engineering, Web Development, and Digital Solutions
-            </p>
+          {/* eyebrow chip */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+            <span className="inline-flex items-center gap-2 rounded-full border border-fuchsia-500/35 bg-fuchsia-500/10 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-fuchsia-300">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-fuchsia-400" />
+              Available for Hire
+            </span>
           </motion.div>
 
-          {/* Work Experience List */}
-          <div className="grid gap-4 max-w-3xl mx-auto">
-            {workExperience.map((work, index) => (
-              <motion.div
-                key={work.company}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.08 }}
-                className="group bg-[#2F2F8A]/20 border border-blue-800/50 hover:border-fuchsia-500/50 rounded-lg p-6 cursor-pointer transition-all hover:shadow-lg hover:shadow-fuchsia-500/10"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="text-3xl flex-shrink-0">{work.icon}</div>
-                  <div className="flex-1">
-                    <Link href={work.website} target="_blank" rel="noopener noreferrer" className="group/link">
-                      <h3 className="text-lg font-bold text-fuchsia-400 group-hover/link:text-fuchsia-300 transition-colors">
-                        {work.company}
-                      </h3>
-                      <p className="text-sm text-white/60 mb-2">{work.role}</p>
-                      <p className="text-xs text-white/40">{work.period}</p>
-                    </Link>
-                  </div>
-                  <svg
-                    className="w-5 h-5 text-white/40 group-hover:text-fuchsia-400 transition-colors flex-shrink-0 mt-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Shopify Projects Section */}
-      <section className="relative py-24 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-bold mb-16"
+          {/* main headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 36 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-7 text-[3.2rem] font-black leading-[1.03] tracking-tight sm:text-7xl md:text-8xl lg:text-[6rem]"
           >
-            <span className="text-fuchsia-500">Shopify</span>{" "}
-            Projects
-          </motion.h2>
+            <span className="text-white">Tech-Savvy</span>
+            <br />
+            <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent">
+              Virtual Assistant
+            </span>
+          </motion.h1>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {shopifyProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="group cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className="relative overflow-hidden rounded-xl bg-[#2F2F8A]/20 border border-blue-800/50 hover:border-fuchsia-500/50 transition-all hover:shadow-xl hover:shadow-fuchsia-500/10">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F103F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                  <div className="p-6">
-                    <div className="flex items-start gap-4">
-                      <span className="bg-gradient-to-br from-fuchsia-500 to-indigo-600 text-white text-xl font-bold w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        0{index + 1}
-                      </span>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-bold text-white group-hover:text-fuchsia-400 transition-colors mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-white/70 line-clamp-2">{project.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section className="relative py-24 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            <div>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="text-5xl md:text-6xl font-bold mb-8"
-              >
-                <span className="text-fuchsia-500">My</span>{" "}
-                Skills
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-white/70 text-lg leading-relaxed mb-6"
-              >
-                I&apos;m <span className="text-fuchsia-400 font-semibold">Zoya Kousar</span>, a professional Virtual Assistant who&apos;s pretty hands-on with tech. Mostly QA, Shopify help, web updates, content. I stay in the background so things just work.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <p className="text-white/80 font-semibold mb-3">What I usually do:</p>
-                <ul className="space-y-2 text-white/70 text-base">
-                  <li className="flex items-start gap-2">
-                    <span className="text-fuchsia-400 mt-1">•</span>
-                    <span>manual testing (websites + apps on phone)</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-fuchsia-400 mt-1">•</span>
-                    <span>Shopify tweaks, custom stuff, support</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-fuchsia-400 mt-1">•</span>
-                    <span>small website updates and fixes</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-fuchsia-400 mt-1">•</span>
-                    <span>helping fix layouts or design bits</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-fuchsia-400 mt-1">•</span>
-                    <span>writing tech stuff or normal articles</span>
-                  </li>
-                </ul>
-                <p className="text-white/70 text-base mt-4 italic">
-                  I just try to keep things clear, consistent, no bullshit, small fixes save big headaches later.
-                </p>
-              </motion.div>
-            </div>
-
-            <div>
-              {skills.map((skill, index) => (
-                <SkillBar key={skill.name} skill={skill} index={index} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Development Projects Section */}
-      <section className="relative py-24 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-bold mb-16"
+          {/* sub-line */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.22 }}
+            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/55 sm:text-lg md:text-xl"
           >
-            <span className="text-fuchsia-500">
-              Development
-            </span>{" "}
-            Projects
-          </motion.h2>
+            QA testing, Shopify builds, web updates, automation &amp; content —
+            <br className="hidden sm:block" />
+            one person, every technical gap covered.
+          </motion.p>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {developmentProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="group cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className="relative overflow-hidden rounded-xl bg-[#2F2F8A]/20 border border-blue-800/50 hover:border-fuchsia-500/50 transition-all hover:shadow-xl hover:shadow-fuchsia-500/10">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-start gap-4">
-                      <span className="bg-gradient-to-br from-fuchsia-500 to-indigo-600 text-white text-xl font-bold w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        0{index + 1}
-                      </span>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-bold text-white group-hover:text-fuchsia-400 transition-colors mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-white/70 line-clamp-2">{project.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* QA Projects Section */}
-      <section className="relative py-24 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-bold mb-16"
-          >
-            <span className="text-fuchsia-500">QA</span>{" "}
-            Projects
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {qaProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="group cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className="relative overflow-hidden rounded-xl bg-[#2F2F8A]/20 border border-blue-800/50 hover:border-fuchsia-500/50 transition-all hover:shadow-xl hover:shadow-fuchsia-500/10">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-start gap-4">
-                      <span className="bg-gradient-to-br from-fuchsia-500 to-indigo-600 text-white text-xl font-bold w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        0{index + 1}
-                      </span>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-bold text-white group-hover:text-fuchsia-400 transition-colors mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-white/70 line-clamp-2">{project.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tech Writing Projects Section */}
-      <section className="relative py-24 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-bold mb-16"
-          >
-            <span className="text-fuchsia-500">Technical</span>{" "}
-            Writing
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {techWriterProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="group cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className="relative overflow-hidden rounded-xl bg-[#2F2F8A]/20 border border-blue-800/50 hover:border-fuchsia-500/50 transition-all hover:shadow-xl hover:shadow-fuchsia-500/10">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-start gap-4">
-                      <span className="bg-gradient-to-br from-fuchsia-500 to-indigo-600 text-white text-xl font-bold w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        0{index + 1}
-                      </span>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-bold text-white group-hover:text-fuchsia-400 transition-colors mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-white/70 line-clamp-2">{project.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact CTA Section - Before Footer */}
-      <section className="relative py-24 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
+          {/* skill pills */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="flex flex-col items-center justify-center w-full lg:w-1/2 mx-auto bg-cover bg-center p-3 lg:p-12"
+            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.34 }}
+            className="mt-8 flex flex-wrap justify-center gap-2"
           >
-            <img 
-              src="/zoya-contact.png" 
-              alt="Zoya Contact" 
-              className="h-[350px] rounded-full object-cover mb-6 border-4 border-fuchsia-500/30 shadow-2xl shadow-fuchsia-500/20"
-            />
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center">
-              Let&apos;s chat over the coffee
-            </h2>
-            <p className="text-sm text-gray-300 text-center mb-6 md:px-4 max-w-md">
-              Let&apos;s automate your growth. Book a strategy call now and let&apos;s build something bold.
-            </p>
-            <div className="flex items-center space-x-2 bg-[#2F2F8A]/30 px-6 py-3 rounded-full border border-blue-800/50">
-              <img src="/zoya-email.png" alt="Email Icon" className="h-7" />
-              <span className="text-sm text-white">zoyakou2@gmail.com</span>
-            </div>
+            {highlights.map((h) => (
+              <span key={h} className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/60 backdrop-blur-sm">
+                {h}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.44 }}
+            className="mt-9 flex flex-wrap items-center justify-center gap-3"
+          >
+            <a href="/cv/va.pdf" download
+              className="rounded-[50px] bg-gradient-primary px-8 py-3.5 text-sm font-semibold text-white transition-all bg-gradient-primary-hover sm:text-base">
+              Download CV
+            </a>
+            <Link href="/#contact"
+              className="flex items-center gap-2 rounded-[50px] border border-white/15 bg-white/5 px-8 py-3.5 text-sm font-semibold text-white/80 backdrop-blur-sm transition hover:border-fuchsia-400/40 hover:bg-white/10 sm:text-base">
+              Hire Me <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </motion.div>
+
+          {/* stats row */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.54 }}
+            className="mt-14 flex flex-wrap items-center justify-center gap-8 border-t border-white/8 pt-10"
+          >
+            {stats.map((s, i) => (
+              <div key={s.label} className="flex items-center gap-8">
+                <div className="text-center">
+                  <p className="text-3xl font-black text-white sm:text-4xl">{s.number}</p>
+                  <p className="mt-1 text-xs text-white/40">{s.label}</p>
+                </div>
+                {i < stats.length - 1 && <div className="hidden h-10 w-px bg-white/10 sm:block" />}
+              </div>
+            ))}
+          </motion.div>
+
+          {/* intro video */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.62 }}
+            className="mx-auto mt-14 max-w-2xl overflow-hidden rounded-2xl border border-white/10 shadow-[0_0_60px_-12px_rgba(201,97,222,0.35)]"
+          >
+            <YouTubeVideo videoId={PORTFOLIO_VIDEOS.vaWork} title="Virtual Assistant Introduction" />
+          </motion.div>
+          <p className="mt-3 text-center text-xs text-white/30">▶ Watch the intro</p>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════ SKILLS ══════════════════════════════ */}
+      <section className="relative border-t border-white/5 px-4 py-16 md:px-8 md:py-24 lg:px-16">
+        <div className="pointer-events-none absolute left-0 top-1/4 h-72 w-72 rounded-full bg-fuchsia-600/5 blur-3xl" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <SectionHeader eyebrow="What I Do" title="Core" highlight="Skills"
+            description="One point of contact for QA, development, content, and automation — so nothing falls through the cracks." />
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+            {skills.map(({ label, Icon, desc, ring, card }, i) => (
+              <motion.div key={label} custom={i} initial="hidden" whileInView="show" viewport={vp} variants={fadeUp}
+                whileHover={{ y: -6, transition: { type: "spring", stiffness: 400, damping: 22 } }}
+                className={`group relative overflow-hidden rounded-2xl border-2 bg-gradient-to-br from-[#13143a]/95 to-[#09091f]/95 p-5 shadow-xl sm:p-6 ${card}`}
+              >
+                <div className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-gradient-to-br from-white/8 to-transparent blur-2xl" />
+                <div className="relative flex items-start gap-4">
+                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-lg ring-2 ring-white/10 sm:h-14 sm:w-14 sm:rounded-2xl ${ring}`}>
+                    <Icon className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1.65} />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold text-white sm:text-lg">{label}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-white/60 sm:text-sm">{desc}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════ EXPERIENCE ═════════════════════════════ */}
+      <section className="relative border-t border-white/5 px-4 py-16 md:px-8 md:py-24 lg:px-16">
+        <div className="pointer-events-none absolute right-0 top-1/3 h-80 w-80 rounded-full bg-indigo-600/5 blur-3xl" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <SectionHeader eyebrow="Career" title="Work" highlight="Experience"
+            description="Companies I've supported across QA, development, and digital operations." />
+          <motion.div initial="hidden" whileInView="show" viewport={vp} variants={stagger} className="mx-auto max-w-3xl space-y-3">
+            {experience.map((job) => (
+              <motion.div key={job.company} variants={item}>
+                <Link href={job.url} target="_blank" rel="noopener noreferrer"
+                  className={`group flex items-center gap-4 rounded-xl border bg-white/[0.03] p-5 backdrop-blur-sm transition hover:bg-white/[0.06] hover:shadow-lg ${job.accent}`}
+                >
+                  <span className="text-2xl">{job.icon}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-white group-hover:text-fuchsia-300 transition-colors truncate">{job.company}</p>
+                    <p className="text-sm text-white/55">{job.role}</p>
+                  </div>
+                  <div className="flex flex-col items-end gap-1 shrink-0">
+                    <span className="text-xs font-mono text-white/35">{job.period}</span>
+                    <ArrowUpRight className="h-4 w-4 text-white/25 group-hover:text-fuchsia-400 transition-colors" aria-hidden />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      <ProjectModal project={selectedProject} isOpen={!!selectedProject} onClose={() => setSelectedProject(null)} />
+      {/* ════════════════════════════ PROJECTS ═══════════════════════════════ */}
+      <section className="relative border-t border-white/5 px-4 py-16 md:px-8 md:py-24 lg:px-16">
+        <div className="pointer-events-none absolute left-0 bottom-1/4 h-72 w-72 rounded-full bg-fuchsia-600/5 blur-3xl" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <SectionHeader eyebrow="Portfolio" title="Selected" highlight="Projects"
+            description="Shopify stores, web builds, QA testing, and content — real work, real results." />
+          <motion.div initial="hidden" whileInView="show" viewport={vp} variants={stagger}
+            className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {projects.map((p, i) => <ProjectCard key={p.title} p={p} i={i} />)}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════ CTA ════════════════════════════════ */}
+      <section className="relative border-t border-white/5 px-4 py-16 md:px-8 md:py-24 lg:px-16">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute left-1/2 top-0 h-72 w-[700px] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-[80px]" />
+        </div>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={vp}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 mx-auto max-w-3xl overflow-hidden rounded-3xl border border-fuchsia-500/20 bg-gradient-to-br from-fuchsia-950/60 via-[#0d0e30]/80 to-indigo-950/60 p-8 text-center shadow-[0_0_80px_-20px_rgba(201,97,222,0.4)] backdrop-blur-sm sm:p-12"
+        >
+          {/* top shimmer line */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-fuchsia-400/50 to-transparent" />
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/zoya-contact.png" alt="Zoya Kousar"
+            className="mx-auto mb-6 h-24 w-24 rounded-full border-2 border-fuchsia-500/40 object-cover shadow-2xl shadow-fuchsia-500/20 ring-4 ring-fuchsia-500/10 sm:h-28 sm:w-28" />
+
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-fuchsia-300">
+            <Sparkles className="h-3.5 w-3.5" aria-hidden />Let&apos;s Work Together
+          </span>
+
+          <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
+            Ready to{" "}
+            <span className="bg-gradient-to-r from-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
+              streamline your ops?
+            </span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/60 sm:text-base">
+            Book a strategy call and let&apos;s figure out exactly how I can save your team time, catch problems early, and keep everything running.
+          </p>
+
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link href="/#contact"
+              className="rounded-[50px] bg-gradient-primary px-8 py-3.5 text-sm font-semibold text-white transition-all bg-gradient-primary-hover sm:text-base">
+              Book a Strategy Call
+            </Link>
+            <a href="mailto:zoyakou2@gmail.com"
+              className="flex items-center gap-2 rounded-[50px] border border-white/20 bg-white/5 px-8 py-3.5 text-sm font-semibold text-white/80 transition hover:border-fuchsia-400/40 hover:bg-white/10 sm:text-base">
+              zoyakou2@gmail.com
+            </a>
+          </div>
+        </motion.div>
+      </section>
+
     </div>
   )
 }
