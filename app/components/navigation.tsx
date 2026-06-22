@@ -206,6 +206,9 @@ const Navigation = () => {
               Contact
             </Link>
           )}
+             <Link href="/pricing" onClick={() => setActiveLink("/pricing")}>
+            <div className={getNavLinkClass("/pricing")}>Pricing</div>
+          </Link>
         </div>
 
         {/* Mobile Menu Icon */}
