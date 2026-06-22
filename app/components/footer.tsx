@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ChevronUp, Instagram,  Sparkles } from "lucide-react";
 
 const INSTAGRAM_URL = "https://www.instagram.com/zoyaadnan/";
@@ -24,8 +24,8 @@ const FACT_STRIP = [
 ];
 
 export default function Footer() {
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+const [showScrollTop] = useState(false);
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <footer className="relative mt-auto w-full min-w-0 overflow-hidden rounded-tl-3xl rounded-tr-3xl border border-zinc-800 bg-black px-4 py-10 sm:px-8 md:px-10 lg:px-12 lg:py-12 xl:px-16 max-md:max-w-full">
