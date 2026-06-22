@@ -201,7 +201,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="min-w-0 lg:col-span-3">
+          {/* <div className="min-w-0 lg:col-span-3">
             <h2 className="text-base font-semibold tracking-wide text-white md:text-[17px]">
               Contact
             </h2>
@@ -238,7 +238,7 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         {/* Fact strip — quick credibility row */}
