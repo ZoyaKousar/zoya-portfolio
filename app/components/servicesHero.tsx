@@ -37,19 +37,17 @@ export default function ServicesHero() {
             <div className="flex flex-col gap-0 overflow-hidden">
               {["SERVICES", "DESIGNED TO", "INSPIRE &", "ELEVATE."].map((line, i) => (
                 <div key={line} className="overflow-hidden">
-                  <motion.h1
-                    initial={{ y: "110%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.75, ease: EASE, delay: 0.2 + i * 0.1 }}
-                    className="text-[clamp(52px,10vw,130px)] font-black leading-[0.88] tracking-[-0.03em] text-white"
-                    style={{
-                      WebkitTextStroke:
-                        i === 3 ? "1.5px rgba(255,255,255,0.3)" : undefined,
-                      color: i === 3 ? "transparent" : undefined,
-                    }}
-                  >
-                    {line}
-                  </motion.h1>
+       <motion.h1
+  initial={{ y: "110%" }}
+  animate={{ y: 0 }}
+  transition={{ duration: 0.75, ease: EASE, delay: 0.2 + i * 0.1 }}
+  className="text-[clamp(52px,10vw,130px)] font-black leading-[0.88] tracking-[-0.03em]"
+  style={{
+    color: i === 3 ? "#c961de" : "white",
+  }}
+>
+  {line}
+</motion.h1>
                 </div>
               ))}
             </div>
