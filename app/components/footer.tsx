@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ChevronUp, Instagram, Mail, MapPin, Clock, Sparkles } from "lucide-react";
+import { ChevronUp, Instagram,  Sparkles } from "lucide-react";
 
 const INSTAGRAM_URL = "https://www.instagram.com/zoyaadnan/";
 
@@ -25,34 +25,6 @@ const FACT_STRIP = [
 
 export default function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const onScroll = () => setShowScrollTop(window.scrollY > 360);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const updateTime = () => {
-      try {
-        const now = new Intl.DateTimeFormat("en-US", {
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
-          timeZone: "Asia/Karachi",
-        }).format(new Date());
-        setTime(now);
-      } catch {
-        setTime("");
-      }
-    };
-    updateTime();
-    const id = window.setInterval(updateTime, 30_000);
-    return () => window.clearInterval(id);
-  }, []);
-
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
