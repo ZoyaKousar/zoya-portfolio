@@ -92,7 +92,7 @@ export default function RecentWorkSection() {
       style={{ height: `${total * 100}vh` }}
       className="relative w-full"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0b0420]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-purple-950">
 
         {/* Full-bleed background — swaps instantly with the panel */}
         <AnimatePresence initial={false}>
@@ -116,8 +116,10 @@ export default function RecentWorkSection() {
         </AnimatePresence>
 
         {/* Overlays */}
-        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-[#0b0420]/95 via-[#0b0420]/70 to-[#0b0420]/30" />
-        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#0b0420] via-transparent to-[#0b0420]/60" />
+  {/* Purple overlays */}
+<div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-purple-950/95 via-purple-900/70 to-fuchsia-900/30" />
+
+<div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-purple-950/85 via-transparent to-fuchsia-950/50" />
 
         {/* Copy — animates on index change */}
         <div className="absolute inset-0 z-20 flex items-center px-6 sm:px-10 lg:px-20">
